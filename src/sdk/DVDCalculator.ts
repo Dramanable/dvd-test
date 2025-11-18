@@ -1,6 +1,7 @@
 import { Movie, MovieType } from '../domain/entities/Movie';
 import { Cart } from '../domain/entities/Cart';
 import { CalculateCartPrice } from '../application/use-cases/CalculateCartPrice';
+import { ValidationException } from '../domain/exceptions';
 
 /**
  * Result of a detailed price calculation
@@ -87,7 +88,7 @@ export class DVDCalculator {
    */
   calculate(movieTitles: string[]): number {
     if (movieTitles === null || movieTitles === undefined) {
-      throw new Error('movieTitles cannot be null or undefined');
+      throw ValidationException.nullOrUndefined('movieTitles');
     }
 
     // Filter out empty strings and trim
@@ -114,7 +115,7 @@ export class DVDCalculator {
    */
   calculateWithDetails(movieTitles: string[]): CalculationResult {
     if (movieTitles === null || movieTitles === undefined) {
-      throw new Error('movieTitles cannot be null or undefined');
+      throw ValidationException.nullOrUndefined('movieTitles');
     }
 
     // Filter and trim
