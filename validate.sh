@@ -45,7 +45,7 @@ echo "[3/4] Testing examples..."
 test_example() {
     local file=$1
     local expected=$2
-    local result=$(node dist/index.js "$file" 2>/dev/null)
+    local result=$(node dist/cli.js "$file" 2>/dev/null)
     
     if [ "$result" = "$expected" ]; then
         success "Example $(basename $file): $result (expected: $expected)"
@@ -65,7 +65,7 @@ success "All examples passed"
 echo ""
 
 echo "[4/4] Testing pipe input..."
-PIPE_RESULT=$(echo -e "Back to the Future 1\nBack to the Future 2" | node dist/index.js 2>/dev/null)
+PIPE_RESULT=$(echo -e "Back to the Future 1\nBack to the Future 2" | node dist/cli.js 2>/dev/null)
 if [ "$PIPE_RESULT" = "27" ]; then
     success "Pipe input: $PIPE_RESULT (expected: 27)"
 else
@@ -79,9 +79,9 @@ if [ $ERRORS -eq 0 ]; then
     echo "=========================================="
     echo ""
     echo "Project statistics:"
-    echo "  - Test suites: 4"
-    echo "  - Tests: 34"
-    echo "  - Coverage: >85%"
+    echo "  - Test suites: 16"
+    echo "  - Tests: 243"
+    echo "  - Coverage: >83%"
     echo "  - Examples validated: 5"
     echo ""
     echo "The project is ready for delivery! ✨"
