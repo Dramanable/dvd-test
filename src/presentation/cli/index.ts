@@ -3,8 +3,112 @@
 
 import * as fs from 'fs';
 import * as readline from 'readline';
+import type { ReadStream, WriteStream } from 'tty';
 import { DVDCalculatorService } from '../../application/services/DVDCalculatorService';
 import { InputParser } from '../../infrastructure/adapters/InputParser';
+
+/**
+ * CLI handler - separated for testing
+ */
+export class CLIHandler {
+  constructor(
+    private readonly service: DVDCalculatorService,
+    private readonly fileSystem: { readFileSync: typeof fs.readFileSync } = fs,
+    private readonly processArgs: string[] = process.argv.slice(2),
+    private readonly stdin: ReadStream | NodeJS.ReadStream = process.stdin,
+    private readonly stdout: WriteStream | NodeJS.WriteStream = process.stdout
+  ) {}
+
+  /**
+   * Handle file input mode
+   */
+  handleFileInput(filePath: string): void {
+    try {
+      const input = this.fileSystem.readFileSync(filePath, 'utf-8');
+      this.service.runAndDisplay(input);
+    } catch (error) {
+      console.error(`Error reading file: ${error}`);
+      process.exit(1);
+    }
+  }
+
+  /**
+   * Handle piped stdin input
+   */
+  async handleStdinInput(): Promise<void> {
+    const input = await this.readStdin();
+    this.service.runAndDisplay(input);
+  }
+
+  /**
+   * Handle interactive mode
+   */
+  async handleInteractiveInput(): Promise<void> {
+    console.log('DVD Shop Price Calculator');
+    console.log('=========================');
+    console.log('Enter movie titles (one per line).');
+    console.log('Press Ctrl+D (Unix) or Ctrl+Z (Windows) when done.\n');
+
+    const input = await this.readInteractive();
+    this.service.runAndDisplay(input);
+  }
+
+  /**
+   * Read input from stdin (for piped input)
+   */
+  private readStdin(): Promise<string> {
+    return new Promise((resolve) => {
+      let data = '';
+      this.stdin.on('data', (chunk) => {
+        data += chunk;
+      });
+      this.stdin.on('end', () => {
+        resolve(data);
+      });
+    });
+  }
+
+  /**
+   * Read input interactively line by line
+   */
+  private readInteractive(): Promise<string> {
+    return new Promise((resolve) => {
+      const lines: string[] = [];
+      const rl = readline.createInterface({
+        input: this.stdin,
+        output: this.stdout,
+      });
+
+      rl.on('line', (line) => {
+        lines.push(line);
+      });
+
+      rl.on('close', () => {
+        resolve(lines.join('\n'));
+      });
+    });
+  }
+
+  /**
+   * Run CLI with appropriate input mode
+   */
+  async run(): Promise<void> {
+    // If a file path is provided as argument
+    if (this.processArgs.length > 0 && this.processArgs[0] !== '-') {
+      this.handleFileInput(this.processArgs[0]);
+      return;
+    }
+
+    // Check if data is being piped in
+    if (!this.stdin.isTTY) {
+      await this.handleStdinInput();
+      return;
+    }
+
+    // Interactive mode
+    await this.handleInteractiveInput();
+  }
+}
 
 /**
  * Main entry point for the DVD shop calculator
@@ -14,77 +118,16 @@ import { InputParser } from '../../infrastructure/adapters/InputParser';
 async function main(): Promise<void> {
   // Dependency Injection: inject the infrastructure implementation
   const inputParser = new InputParser();
-  const app = new DVDCalculatorService(inputParser);
-  const args = process.argv.slice(2);
+  const service = new DVDCalculatorService(inputParser);
+  const cli = new CLIHandler(service);
 
-  // If a file path is provided as argument
-  if (args.length > 0 && args[0] !== '-') {
-    const filePath = args[0];
-    try {
-      const input = fs.readFileSync(filePath, 'utf-8');
-      app.runAndDisplay(input);
-    } catch (error) {
-      console.error(`Error reading file: ${error}`);
-      process.exit(1);
-    }
-    return;
-  }
-
-  // Check if data is being piped in
-  if (!process.stdin.isTTY) {
-    const input = await readStdin();
-    app.runAndDisplay(input);
-    return;
-  }
-
-  // Interactive mode
-  console.log('DVD Shop Price Calculator');
-  console.log('=========================');
-  console.log('Enter movie titles (one per line).');
-  console.log('Press Ctrl+D (Unix) or Ctrl+Z (Windows) when done.\n');
-
-  const input = await readInteractive();
-  app.runAndDisplay(input);
+  await cli.run();
 }
 
-/**
- * Read input from stdin (for piped input)
- */
-function readStdin(): Promise<string> {
-  return new Promise((resolve) => {
-    let data = '';
-    process.stdin.on('data', (chunk) => {
-      data += chunk;
-    });
-    process.stdin.on('end', () => {
-      resolve(data);
-    });
+// Run the application only if executed directly (not imported)
+if (require.main === module) {
+  main().catch((error) => {
+    console.error('Unexpected error:', error);
+    process.exit(1);
   });
 }
-
-/**
- * Read input interactively line by line
- */
-function readInteractive(): Promise<string> {
-  return new Promise((resolve) => {
-    const lines: string[] = [];
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
-    rl.on('line', (line) => {
-      lines.push(line);
-    });
-
-    rl.on('close', () => {
-      resolve(lines.join('\n'));
-    });
-  });
-}
-
-// Run the application
-main().catch((error) => {
-  console.error('Unexpected error:', error);
-  process.exit(1);
-});
