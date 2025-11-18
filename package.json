@@ -2,22 +2,27 @@
   "name": "dvd-shop-calculator",
   "version": "1.0.0",
   "description": "Back to the Future DVD shop price calculator with TDD and Clean Architecture",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/presentation/sdk/index.js",
+  "types": "dist/presentation/sdk/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/sdk/index.js",
-      "require": "./dist/sdk/index.js",
-      "types": "./dist/sdk/index.d.ts"
+      "import": "./dist/presentation/sdk/index.js",
+      "require": "./dist/presentation/sdk/index.js",
+      "types": "./dist/presentation/sdk/index.d.ts"
     },
     "./cli": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/presentation/cli/index.js",
+      "require": "./dist/presentation/cli/index.js",
+      "types": "./dist/presentation/cli/index.d.ts"
+    },
+    "./api": {
+      "import": "./dist/presentation/api/index.js",
+      "require": "./dist/presentation/api/index.js",
+      "types": "./dist/presentation/api/index.d.ts"
     }
   },
   "bin": {
-    "dvd-calculator": "./dist/index.js"
+    "dvd-calculator": "./dist/presentation/cli/index.js"
   },
   "files": [
     "dist",
@@ -26,10 +31,10 @@
   ],
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "start:api": "node dist/api/index.js",
-    "dev": "ts-node src/index.ts",
-    "dev:api": "ts-node src/api/index.ts",
+    "start:cli": "node dist/presentation/cli/index.js",
+    "start:api": "node dist/presentation/api/index.js",
+    "dev:cli": "ts-node src/presentation/cli/index.ts",
+    "dev:api": "ts-node src/presentation/api/index.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -58,6 +63,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
+    "@types/ioredis": "^4.28.10",
     "@types/jest": "^29.5.11",
     "@types/node": "^20.10.6",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
@@ -68,6 +74,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",
+    "ioredis": "^5.8.2",
     "jest": "^29.7.0",
     "lint-staged": "^16.2.6",
     "prettier": "^3.6.2",
@@ -88,7 +95,10 @@
     ]
   },
   "dependencies": {
+    "@fastify/compress": "^8.3.0",
     "@fastify/cors": "^11.1.0",
+    "@fastify/helmet": "^13.0.2",
+    "@fastify/rate-limit": "^10.3.0",
     "@fastify/swagger": "^9.6.1",
     "@fastify/swagger-ui": "^5.2.3",
     "fastify": "^5.6.2"

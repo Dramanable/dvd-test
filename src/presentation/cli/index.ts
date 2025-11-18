@@ -1,19 +1,20 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 import * as fs from 'fs';
 import * as readline from 'readline';
-import { DVDCalculatorApp } from './application/DVDCalculatorApp';
-import { InputParser } from './infrastructure/InputParser';
+import { DVDCalculatorService } from '../../application/services/DVDCalculatorService';
+import { InputParser } from '../../infrastructure/adapters/InputParser';
 
 /**
  * Main entry point for the DVD shop calculator
  * Handles different input modes: file, stdin, or interactive
  * This is where dependency injection happens (Infrastructure → Application)
  */
-async function main() {
+async function main(): Promise<void> {
   // Dependency Injection: inject the infrastructure implementation
   const inputParser = new InputParser();
-  const app = new DVDCalculatorApp(inputParser);
+  const app = new DVDCalculatorService(inputParser);
   const args = process.argv.slice(2);
 
   // If a file path is provided as argument

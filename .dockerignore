@@ -1,10 +1,55 @@
+# Dependencies
 node_modules
+npm-debug.log
+
+# Build output
 dist
+*.tsbuildinfo
+
+# Tests
 coverage
-*.log
+.nyc_output
+**/__tests__
+**/*.test.ts
+**/*.spec.ts
+
+# Development
 .git
 .gitignore
-README.md
-QUICKSTART.md
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Documentation (keep README for Docker)
+*.md
+!README.md
+docs
 examples
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# CI/CD
+.github
+.husky
+
+# Scripts
 validate.sh
+Makefile
+
+# Logs
+logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp
+temp
+*.tmp

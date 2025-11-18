@@ -1,230 +1,435 @@
-# DVD Shop Calculator# DVD Shop Calculator# DVD Shop Calculator# DVD Shop Calculator# DVD Shop Price Calculator# DVD Shop Price Calculator
+# DVD Calculator - Clean Architecture# DVD Calculator - Clean Architecture
 
 
 
-![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)
+![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)
 
-![Node](https://img.shields.io/badge/node-24.x-brightgreen)
+![Tests](https://img.shields.io/badge/tests-166%20passing-brightgreen)![Tests](https://img.shields.io/badge/tests-166%20passing-brightgreen)
 
-![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)
+![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 
-![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen)
+![Node](https://img.shields.io/badge/node-24.x-brightgreen)![Node](https://img.shields.io/badge/node-24.x-brightgreen)
 
-![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)![Node](https://img.shields.io/badge/node-24.x-brightgreen)
+![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)
 
-![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)
-
-![License](https://img.shields.io/badge/license-ISC-blue)![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
+![License](https://img.shields.io/badge/license-ISC-blue)![License](https://img.shields.io/badge/license-ISC-blue)
 
 
 
-Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen)
+Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
 
 
 
-## 🚀 Démarrage rapide![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+**Architecture Clean avec Dependency Inversion** : 0 logique métier dans la présentation.
 
 
 
-```bash![License](https://img.shields.io/badge/license-ISC-blue)
-
-# Voir toutes les commandes disponibles
-
-make help## 🚀 Démarrage rapideCalculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
+## 📚 Documentation## 🚀 Démarrage rapide![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 
 
 
-# Démarrage rapide completCalculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Architecture Clean détaillée avec diagrammes
+
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Guide de contribution
+
+- **[COMMITS.md](./COMMITS.md)** - Conventional Commits```bash![License](https://img.shields.io/badge/license-ISC-blue)
+
+
+
+## 🚀 Démarrage rapide# Voir toutes les commandes disponibles
+
+
+
+```bashmake help## 🚀 Démarrage rapideCalculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
+
+# Installation + Build + Test
 
 make quick-start
 
 
 
-# Pipeline CI complet
+# Pipeline CI complet# Démarrage rapide completCalculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
 
-make ci## 🚀 Démarrage rapide
+make ci
 
+make quick-start
 
-
-# Build et test avec Docker```bash
-
-make docker-build
-
-make docker-test```bash
-
-```
-
-# Voir toutes les commandes disponibles# Voir toutes les commandes disponibles
-
-## 📋 Commandes Makefile
+# Voir toutes les commandes
 
 make help
 
-| Commande | Description |
+```
 
-|----------|-------------|make help## 🚀 Démarrage rapide avec DockerCalculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
+# Pipeline CI complet
 
-| `make help` | Affiche l'aide |
+## 💰 Règles métier
 
-| `make quick-start` | Installation + build + exécution |# Démarrage rapide complet
-
-| `make install` | Installe les dépendances |
-
-| `make build` | Compile le projet TypeScript |make quick-start
-
-| `make lint` | Vérifie la qualité du code (ESLint) |
-
-| `make lint-fix` | Corrige automatiquement les problèmes |
-
-| `make commit` | Créer un commit sémantique (Commitizen) |
-
-| `make test` | Lance les 34 tests |# Pipeline CI complet# Démarrage rapide complet
-
-| `make test-coverage` | Tests avec couverture |
-
-| `make validate` | Validation complète (script) |make ci
-
-| `make run` | Exécute avec example1.txt |
-
-| `make docker-build` | Build l'image Docker |make quick-start
-
-| `make docker-run` | Exécute avec Docker |
-
-| `make docker-test` | Teste tous les exemples Docker |# Build et test avec Docker
-
-| `make docker-interactive` | Mode interactif Docker |
-
-| `make ci` | Pipeline CI (lint + build + test) |make docker-build```bash[![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen)](.)
-
-| `make all` | Installation complète + validation |
-
-| `make clean` | Nettoie les fichiers générés |make docker-test
-
-
-
-## 💰 Règles métier```# Build et test avec Docker
-
-
+make ci## 🚀 Démarrage rapide
 
 **Tarifs** :
 
 - Back to the Future : 15€
 
-- Autres films : 20€## 📋 Commandes Makefilemake docker-build# Build l'image
+- Autres films : 20€
 
-
+# Build et test avec Docker```bash
 
 **Promotions (BTTF uniquement)** :
 
-- 2 volets différents → 10% de réduction sur tous les DVDs BTTF
+- 2 volets différents → 10% de réduction sur tous les DVDs BTTFmake docker-build
 
-- 3 volets différents → 20% de réduction sur tous les DVDs BTTF| Commande | Description |make docker-test
+- 3 volets différents → 20% de réduction sur tous les DVDs BTTF
+
+make docker-test```bash
+
+## 📊 Exemples
+
+```
+
+| Panier | Calcul | Prix |
+
+|--------|--------|------|# Voir toutes les commandes disponibles# Voir toutes les commandes disponibles
+
+| 3 volets BTTF | (15×3)×0.8 | **36€** |
+
+| 2 volets BTTF | (15×2)×0.9 | **27€** |## 📋 Commandes Makefile
+
+| 1 volet BTTF | 15×1 | **15€** |
+
+| 4 DVDs BTTF (3 volets) | (15×4)×0.8 | **48€** |make help
+
+| 3 BTTF + 1 autre | (15×3)×0.8+20 | **56€** |
+
+| Commande | Description |
+
+## 🏗️ Architecture (Résumé)
+
+|----------|-------------|make help## 🚀 Démarrage rapide avec DockerCalculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
+
+**Clean Architecture** avec séparation stricte des couches :
+
+| `make help` | Affiche l'aide |
+
+```
+
+Presentation (CLI/API/SDK)| `make quick-start` | Installation + build + exécution |# Démarrage rapide complet
+
+    ↓ injecte adapters
+
+Application (DVDCalculatorService + Ports)| `make install` | Installe les dépendances |
+
+    ↓ dépend de
+
+Infrastructure (Adapters: InputParser, Cache)| `make build` | Compile le projet TypeScript |make quick-start
+
+    ↓ utilise
+
+Domain (Movie, Cart - 0 dépendance)| `make lint` | Vérifie la qualité du code (ESLint) |
+
+```
+
+| `make lint-fix` | Corrige automatiquement les problèmes |
+
+**Principes appliqués** :
+
+- ✅ **Dependency Inversion Principle** - Les dépendances pointent vers les abstractions| `make commit` | Créer un commit sémantique (Commitizen) |
+
+- ✅ **Zero business logic in presentation** - Uniquement orchestration
+
+- ✅ **Single Responsibility Principle** - Une classe = une responsabilité| `make test` | Lance les 34 tests |# Pipeline CI complet# Démarrage rapide complet
+
+- ✅ **Test-Driven Development** - 166 tests avec couverture 100%
+
+| `make test-coverage` | Tests avec couverture |
+
+**Voir [ARCHITECTURE.md](./ARCHITECTURE.md) pour les détails complets.**
+
+| `make validate` | Validation complète (script) |make ci
+
+## 📦 Commandes Make
+
+| `make run` | Exécute avec example1.txt |
+
+| Commande | Description |
+
+|----------|-------------|| `make docker-build` | Build l'image Docker |make quick-start
+
+| `make help` | Affiche l'aide complète |
+
+| `make quick-start` | Installation + build + exécution || `make docker-run` | Exécute avec Docker |
+
+| `make install` | Installe les dépendances |
+
+| `make build` | Compile le projet TypeScript || `make docker-test` | Teste tous les exemples Docker |# Build et test avec Docker
+
+| `make test` | Lance les 166 tests |
+
+| `make lint` | Vérifie ESLint || `make docker-interactive` | Mode interactif Docker |
+
+| `make lint-fix` | Corrige automatiquement |
+
+| `make ci` | Pipeline CI complet || `make ci` | Pipeline CI (lint + build + test) |make docker-build```bash[![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen)](.)
+
+| `make docker-build` | Build l'image Docker |
+
+| `make docker-test` | Teste avec Docker || `make all` | Installation complète + validation |
 
 
 
-## 📊 Exemples|----------|-------------|
+## 📝 Utilisation| `make clean` | Nettoie les fichiers générés |make docker-test
 
 
 
-| Panier | Calcul | Résultat || `make help` | Affiche l'aide |```docker build -t dvd-calculator .## Installation et lancement[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](.)
-
-|--------|--------|----------|
-
-| 3 volets BTTF | (15×3)×0.8 | **36€** || `make quick-start` | Installation + build + exécution |
-
-| 2 volets BTTF | (15×2)×0.9 | **27€** |
-
-| 1 volet BTTF | 15×1 | **15€** || `make install` | Installe les dépendances |
-
-| 4 DVDs (3 volets) | (15×4)×0.8 | **48€** |
-
-| 3 BTTF + 1 autre | (15×3)×0.8+20 | **56€** || `make build` | Compile le projet TypeScript |
+### Mode CLI
 
 
 
-## 🧪 Tests & Qualité| `make lint` | Vérifie la qualité du code (ESLint) |## 📋 Commandes Makefile
+```bash## 💰 Règles métier```# Build et test avec Docker
+
+# Fichier d'entrée
+
+node dist/index.js examples/example1.txt
 
 
 
-### Tests| `make lint-fix` | Corrige automatiquement les problèmes |
+# Pipe**Tarifs** :
+
+echo -e "Back to the Future 1\nBack to the Future 2" | node dist/index.js
+
+- Back to the Future : 15€
+
+# Mode interactif
+
+node dist/index.js- Autres films : 20€## 📋 Commandes Makefilemake docker-build# Build l'image
+
+```
 
 
 
-```bash| `make test` | Lance les 34 tests |
+### Mode API REST
 
-make test              # 34 tests
-
-make test-coverage     # Couverture 100%| `make test-coverage` | Tests avec couverture |
-
-make validate          # Validation complète
-
-```| `make validate` | Validation complète (script) || Commande | Description |# Utiliser avec un fichier
-
-
-
-**Résultats** :| `make run` | Exécute avec example1.txt |
-
-- ✅ 34 tests passent
-
-- ✅ 4 test suites| `make docker-build` | Build l'image Docker ||----------|-------------|
-
-- ✅ Couverture 100%
-
-- ✅ 5 exemples validés| `make docker-run` | Exécute avec Docker |
-
-- ✅ Structure `__tests__` organisée
-
-| `make docker-test` | Teste tous les exemples Docker || `make help` | Affiche l'aide |docker run --rm -v $(pwd)/examples:/app/examples dvd-calculator examples/example1.txt
-
-### Qualité du code (ESLint)
-
-| `make docker-interactive` | Mode interactif Docker |
+**Promotions (BTTF uniquement)** :
 
 ```bash
 
-make lint              # Vérification ESLint| `make ci` | Pipeline CI (lint + build + test) || `make quick-start` | Installation + build + exécution |
+npm start- 2 volets différents → 10% de réduction sur tous les DVDs BTTF
 
-make lint-fix          # Correction automatique
+curl -X POST http://localhost:3000/api/v1/calculate \
 
-```| `make all` | Installation complète + validation |
+  -H "Content-Type: application/json" \- 3 volets différents → 20% de réduction sur tous les DVDs BTTF| Commande | Description |make docker-test
 
+  -d '{"movies": ["Back to the Future 1", "Back to the Future 2"]}'
 
-
-**Règles appliquées** :| `make clean` | Nettoie les fichiers générés || `make install` | Installe les dépendances |### PrérequisCalculateur de prix pour une boutique de DVD avec promotions sur la saga "Back to the Future".
-
-- ✅ TypeScript strict
-
-- ✅ Pas de `any`
-
-- ✅ Fonctions explicitement typées
-
-- ✅ Pas de variables inutilisées## 💰 Règles métier| `make build` | Compile le projet TypeScript |
-
-- ✅ Pas de promesses non gérées
-
-- ✅ Code style cohérent
+```
 
 
 
-## 🏗️ Architecture**Tarifs** :| `make test` | Lance les 34 tests |# Utiliser avec pipe
+### Mode SDK## 📊 Exemples|----------|-------------|
 
 
 
-**Clean Architecture + TDD** :- Back to the Future : 15€
+```typescript
+
+import { DVDCalculator } from './presentation/sdk/DVDCalculator';
+
+| Panier | Calcul | Résultat || `make help` | Affiche l'aide |```docker build -t dvd-calculator .## Installation et lancement[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](.)
+
+const calculator = new DVDCalculator();
+
+calculator|--------|--------|----------|
+
+  .addMovie('Back to the Future 1')
+
+  .addMovie('Back to the Future 2');| 3 volets BTTF | (15×3)×0.8 | **36€** || `make quick-start` | Installation + build + exécution |
 
 
 
-```- Autres films : 20€| `make test-coverage` | Tests avec couverture |
+const total = calculator.getTotal(); // 27| 2 volets BTTF | (15×2)×0.9 | **27€** |
+
+```
+
+| 1 volet BTTF | 15×1 | **15€** || `make install` | Installe les dépendances |
+
+## 🧪 Tests
+
+| 4 DVDs (3 volets) | (15×4)×0.8 | **48€** |
+
+**166 tests** avec couverture 100% :
+
+| 3 BTTF + 1 autre | (15×3)×0.8+20 | **56€** || `make build` | Compile le projet TypeScript |
+
+```bash
+
+npm test              # Tous les tests
+
+npm run test:coverage # Avec couverture
+
+npm run test:watch    # Mode watch## 🧪 Tests & Qualité| `make lint` | Vérifie la qualité du code (ESLint) |## 📋 Commandes Makefile
+
+make validate         # Validation complète
+
+```
+
+
+
+**Distribution** :### Tests| `make lint-fix` | Corrige automatiquement les problèmes |
+
+- Domain : 68 tests (Movie, Cart)
+
+- Application : 27 tests (Services, Use Cases)
+
+- Infrastructure : 50 tests (Adapters)
+
+- Presentation : 21 tests (CLI, API, SDK)```bash| `make test` | Lance les 34 tests |
+
+
+
+## 🐳 Dockermake test              # 34 tests
+
+
+
+```bashmake test-coverage     # Couverture 100%| `make test-coverage` | Tests avec couverture |
+
+# Build
+
+docker build -t dvd-calculator .make validate          # Validation complète
+
+
+
+# Exécuter avec fichier```| `make validate` | Validation complète (script) || Commande | Description |# Utiliser avec un fichier
+
+docker run --rm -v $(pwd)/examples:/app/examples dvd-calculator examples/example1.txt
+
+
+
+# Mode interactif
+
+docker run --rm -it dvd-calculator**Résultats** :| `make run` | Exécute avec example1.txt |
+
+
+
+# Avec pipe- ✅ 34 tests passent
+
+echo -e "Back to the Future 1\nBack to the Future 2" | docker run --rm -i dvd-calculator
+
+```- ✅ 4 test suites| `make docker-build` | Build l'image Docker ||----------|-------------|
+
+
+
+## 🎯 Points forts- ✅ Couverture 100%
+
+
+
+### Architecture- ✅ 5 exemples validés| `make docker-run` | Exécute avec Docker |
+
+
+
+- ✅ **Clean Architecture** stricte avec 4 couches- ✅ Structure `__tests__` organisée
+
+- ✅ **Dependency Inversion** - Ports & Adapters pattern
+
+- ✅ **No business logic in presentation** - 100% respecté| `make docker-test` | Teste tous les exemples Docker || `make help` | Affiche l'aide |docker run --rm -v $(pwd)/examples:/app/examples dvd-calculator examples/example1.txt
+
+- ✅ **Domain pur** - 0 dépendance externe
+
+### Qualité du code (ESLint)
+
+### Qualité
+
+| `make docker-interactive` | Mode interactif Docker |
+
+- ✅ **166 tests** - TDD from start
+
+- ✅ **100% coverage** - Tous les chemins testés```bash
+
+- ✅ **TypeScript strict** - Pas de `any`
+
+- ✅ **ESLint** - Code style cohérentmake lint              # Vérification ESLint| `make ci` | Pipeline CI (lint + build + test) || `make quick-start` | Installation + build + exécution |
+
+
+
+### Flexibilitémake lint-fix          # Correction automatique
+
+
+
+- ✅ **3 interfaces** - CLI, API REST, SDK```| `make all` | Installation complète + validation |
+
+- ✅ **Multiple adapters** - InputParser, ArrayInputParser, Cache
+
+- ✅ **Facilement extensible** - Ajouter GraphQL, gRPC, etc.
+
+
+
+## 📁 Structure**Règles appliquées** :| `make clean` | Nettoie les fichiers générés || `make install` | Installe les dépendances |### PrérequisCalculateur de prix pour une boutique de DVD avec promotions sur la saga "Back to the Future".
+
+
+
+```- ✅ TypeScript strict
 
 src/
 
-├── domain/              # Entités métier (0 dépendance)
+├── domain/              # Entités métier (0 dépendance)- ✅ Pas de `any`
 
-│   └── entities/
+│   └── entities/        # Movie, Cart
 
-│       ├── __tests__/   # Tests unitaires**Promotions (BTTF uniquement)** :| `make validate` | Validation complète (script) |echo -e "Back to the Future 1\nBack to the Future 2\nBack to the Future 3" | docker run --rm -i dvd-calculator- Node.js v18+ 
+├── application/         # Use Cases + Ports- ✅ Fonctions explicitement typées
 
-│       ├── Movie.ts
+│   ├── services/        # DVDCalculatorService
+
+│   ├── use-cases/       # CalculateCartPrice- ✅ Pas de variables inutilisées## 💰 Règles métier| `make build` | Compile le projet TypeScript |
+
+│   └── ports/           # IInputParser, ICache
+
+├── infrastructure/      # Adapters- ✅ Pas de promesses non gérées
+
+│   └── adapters/        # InputParser, ArrayInputParser, Cache
+
+└── presentation/        # Interfaces utilisateur- ✅ Code style cohérent
+
+    ├── cli/             # Mode ligne de commande
+
+    ├── api/             # API REST Fastify
+
+    └── sdk/             # Bibliothèque SDK
+
+```## 🏗️ Architecture**Tarifs** :| `make test` | Lance les 34 tests |# Utiliser avec pipe
+
+
+
+## 🤝 Contribution
+
+
+
+Voir [CONTRIBUTING.md](./CONTRIBUTING.md) pour les détails.**Clean Architecture + TDD** :- Back to the Future : 15€
+
+
+
+**Commits sémantiques** (Conventional Commits) :
+
+
+
+```bash```- Autres films : 20€| `make test-coverage` | Tests avec couverture |
+
+make commit  # Guided commit avec Commitizen
+
+```src/
+
+
+
+## 📄 Licence├── domain/              # Entités métier (0 dépendance)
+
+
+
+ISC│   └── entities/
+
+
+
+---│       ├── __tests__/   # Tests unitaires**Promotions (BTTF uniquement)** :| `make validate` | Validation complète (script) |echo -e "Back to the Future 1\nBack to the Future 2\nBack to the Future 3" | docker run --rm -i dvd-calculator- Node.js v18+ 
+
+
+
+**Node.js 24** • **TypeScript 5.3** • **Jest** • **ESLint** • **Clean Architecture** • **Docker** • **Fastify**│       ├── Movie.ts
+
 
 │       └── Cart.ts- 2 volets différents → 10% de réduction sur tous les DVDs BTTF
 

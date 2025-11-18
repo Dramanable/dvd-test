@@ -1,7 +1,8 @@
-import { Movie, MovieType } from '../domain/entities/Movie';
-import { Cart } from '../domain/entities/Cart';
-import { CalculateCartPrice } from '../application/use-cases/CalculateCartPrice';
-import { ValidationException } from '../domain/exceptions';
+import { DVDCalculatorService } from '../../application/services/DVDCalculatorService';
+import { Cart } from '../../domain/entities/Cart';
+import { Movie, MovieType } from '../../domain/entities/Movie';
+import { ValidationException } from '../../domain/exceptions';
+import { ArrayInputParser } from '../../infrastructure/adapters/ArrayInputParser';
 
 /**
  * Result of a detailed price calculation
@@ -65,15 +66,14 @@ export interface CartInfo {
  */
 export class DVDCalculator {
   private cart: Cart;
-  private calculateUseCase: CalculateCartPrice;
 
   constructor() {
     this.cart = new Cart();
-    this.calculateUseCase = new CalculateCartPrice();
   }
 
   /**
    * Calculate total price for a list of movie titles
+   * Uses DVDCalculatorService with dependency inversion
    *
    * @param movieTitles - Array of movie titles
    * @returns Total price in euros
@@ -96,11 +96,16 @@ export class DVDCalculator {
       .filter((title) => title && title.trim().length > 0)
       .map((title) => title.trim());
 
-    return this.calculateUseCase.execute(validTitles);
+    // Dependency Inversion: Use service with ArrayInputParser adapter
+    const inputParser = new ArrayInputParser(validTitles);
+    const service = new DVDCalculatorService(inputParser);
+
+    return service.run(''); // Input ignored, array in parser
   }
 
   /**
    * Calculate price with detailed breakdown
+   * Uses DVDCalculatorService with dependency inversion
    *
    * @param movieTitles - Array of movie titles
    * @returns Detailed calculation result
@@ -123,120 +128,16 @@ export class DVDCalculator {
       .filter((title) => title && title.trim().length > 0)
       .map((title) => title.trim());
 
-    // Create cart
-    const cart = new Cart();
-    validTitles.forEach((title) => {
-      const movie = this.parseMovie(title);
-      cart.addMovie(movie);
-    });
+    // Dependency Inversion: Use service with ArrayInputParser adapter
+    const inputParser = new ArrayInputParser(validTitles);
+    const service = new DVDCalculatorService(inputParser);
 
-    // Calculate prices
-    const total = cart.calculateTotal();
-    const bttfMovies = cart.getMovies().filter((m) => m.isBackToTheFuture());
-    const uniqueEpisodes = this.countUniqueEpisodes(bttfMovies);
-    const discountPercentage = this.getDiscountPercentage(uniqueEpisodes);
-
-    const bttfTotal = bttfMovies.reduce((sum, movie) => sum + movie.getBasePrice(), 0);
-    const subtotal =
-      bttfTotal +
-      cart
-        .getMovies()
-        .filter((m) => !m.isBackToTheFuture())
-        .reduce((sum, m) => sum + m.getBasePrice(), 0);
-    const discount = subtotal - total;
-
-    // Get movie details
-    const movies = cart.getMovies().map((movie) => ({
-      title: movie.title,
-      type: movie.type,
-      basePrice: movie.getBasePrice(),
-      episodeNumber: movie.episode,
-    }));
-
-    return {
-      total: Math.round(total),
-      subtotal: Math.round(subtotal),
-      discount: Math.round(discount),
-      discountPercentage,
-      itemCount: validTitles.length,
-      uniqueEpisodes,
-      movies,
-    };
-  }
-
-  /**
-   * Parse a movie title and create a Movie entity
-   *
-   * @param title - Movie title
-   * @returns Movie entity
-   *
-   * @example
-   * ```typescript
-   * const movie = calculator.parseMovie('Back to the Future II');
-   * console.log(movie.episode); // 2
-   * ```
-   */
-  parseMovie(title: string): Movie {
-    const trimmedTitle = title.trim();
-    const normalizedTitle = trimmedTitle.toLowerCase();
-
-    // Check if it's a Back to the Future movie with numeric episode
-    const bttfNumericPattern = /back to the future\s+(\d+)/i;
-    const numericMatch = trimmedTitle.match(bttfNumericPattern);
-
-    if (numericMatch) {
-      const episode = parseInt(numericMatch[1], 10);
-      return new Movie(trimmedTitle, MovieType.BACK_TO_THE_FUTURE, episode);
-    }
-
-    // Check if it's a Back to the Future movie with Roman numerals
-    if (normalizedTitle.includes('back to the future')) {
-      let episode = 1;
-
-      if (normalizedTitle.includes(' iii')) {
-        episode = 3;
-      } else if (normalizedTitle.includes(' ii')) {
-        episode = 2;
-      }
-
-      return new Movie(trimmedTitle, MovieType.BACK_TO_THE_FUTURE, episode);
-    }
-
-    return new Movie(trimmedTitle, MovieType.OTHER);
-  }
-
-  /**
-   * Count unique BTTF episodes
-   * @param bttfMovies - Array of BTTF movies
-   * @returns Number of unique episodes
-   */
-  private countUniqueEpisodes(bttfMovies: Movie[]): number {
-    const episodes = new Set<number>();
-    for (const movie of bttfMovies) {
-      if (movie.episode !== undefined) {
-        episodes.add(movie.episode);
-      }
-    }
-    return episodes.size;
-  }
-
-  /**
-   * Get discount percentage based on unique episodes
-   * @param uniqueEpisodes - Number of unique episodes
-   * @returns Discount percentage (0, 10, or 20)
-   */
-  private getDiscountPercentage(uniqueEpisodes: number): number {
-    if (uniqueEpisodes >= 3) {
-      return 20;
-    }
-    if (uniqueEpisodes === 2) {
-      return 10;
-    }
-    return 0;
+    return service.runWithDetails(''); // Input ignored, array in parser
   }
 
   /**
    * Add a single movie to the cart (fluent API)
+   * Uses Movie.fromTitle() from domain layer
    *
    * @param title - Movie title
    * @returns this for method chaining
@@ -250,7 +151,7 @@ export class DVDCalculator {
    * ```
    */
   addMovie(title: string): this {
-    const movie = this.parseMovie(title);
+    const movie = Movie.fromTitle(title);
     this.cart.addMovie(movie);
     return this;
   }
@@ -323,6 +224,7 @@ export class DVDCalculator {
 
   /**
    * Get current total price from internal cart
+   * Uses DVDCalculatorService - no business logic
    *
    * @returns Total price in euros
    *
@@ -333,11 +235,19 @@ export class DVDCalculator {
    * ```
    */
   getTotal(): number {
-    return Math.round(this.cart.calculateTotal());
+    // Get movie titles from cart
+    const movieTitles = this.cart.getMovies().map((m) => m.title);
+
+    // Use service to calculate (no business logic here)
+    const inputParser = new ArrayInputParser(movieTitles);
+    const service = new DVDCalculatorService(inputParser);
+
+    return service.run('');
   }
 
   /**
-   * Get cart information
+   * Get cart information using DVDCalculatorService
+   * No business logic - delegates to application layer
    *
    * @returns Cart information with prices and counts
    *
@@ -349,24 +259,20 @@ export class DVDCalculator {
    * ```
    */
   getCartInfo(): CartInfo {
-    const total = this.cart.calculateTotal();
-    const bttfMovies = this.cart.getMovies().filter((m) => m.isBackToTheFuture());
-    const uniqueEpisodes = this.countUniqueEpisodes(bttfMovies);
+    // Get movie titles from cart
+    const movieTitles = this.cart.getMovies().map((m) => m.title);
 
-    const bttfTotal = bttfMovies.reduce((sum, movie) => sum + movie.getBasePrice(), 0);
-    const otherTotal = this.cart
-      .getMovies()
-      .filter((m) => !m.isBackToTheFuture())
-      .reduce((sum, m) => sum + m.getBasePrice(), 0);
-    const subtotal = bttfTotal + otherTotal;
-    const discount = subtotal - total;
+    // Use service to calculate (no business logic here)
+    const inputParser = new ArrayInputParser(movieTitles);
+    const service = new DVDCalculatorService(inputParser);
+    const details = service.runWithDetails('');
 
     return {
-      total: Math.round(total),
-      subtotal: Math.round(subtotal),
-      discount: Math.round(discount),
-      itemCount: this.cart.getMovies().length,
-      uniqueEpisodes,
+      total: details.total,
+      subtotal: details.subtotal,
+      discount: details.discount,
+      itemCount: details.itemCount,
+      uniqueEpisodes: details.uniqueEpisodes,
     };
   }
 

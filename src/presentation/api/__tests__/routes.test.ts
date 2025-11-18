@@ -13,11 +13,11 @@ describe('API Routes - POST /calculate', () => {
     await server.close();
   });
 
-  describe('POST /api/calculate - Success cases', () => {
+  describe('POST /v1/calculate - Success cases', () => {
     it('should calculate price for two BTTF movies with discount', async () => {
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: {
           movies: ['Back to the Future 1', 'Back to the Future 2'],
         },
@@ -34,7 +34,7 @@ describe('API Routes - POST /calculate', () => {
     it('should calculate price for three BTTF movies with 20% discount', async () => {
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: {
           movies: ['Back to the Future 1', 'Back to the Future 2', 'Back to the Future 3'],
         },
@@ -49,7 +49,7 @@ describe('API Routes - POST /calculate', () => {
     it('should calculate price for mixed BTTF and other movies', async () => {
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: {
           movies: ['Back to the Future 1', 'Back to the Future 2', 'Star Wars'],
         },
@@ -63,7 +63,7 @@ describe('API Routes - POST /calculate', () => {
     it('should handle empty movie list', async () => {
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: {
           movies: [],
         },
@@ -77,7 +77,7 @@ describe('API Routes - POST /calculate', () => {
     it('should include detailed breakdown in response', async () => {
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: {
           movies: ['Back to the Future 1', 'Back to the Future 2'],
         },
@@ -95,11 +95,11 @@ describe('API Routes - POST /calculate', () => {
     });
   });
 
-  describe('POST /api/calculate - Validation errors', () => {
+  describe('POST /v1/calculate - Validation errors', () => {
     it('should return 400 if movies field is missing', async () => {
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: {},
       });
 
@@ -112,7 +112,7 @@ describe('API Routes - POST /calculate', () => {
       const server = await buildServer();
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: {
           movies: 'not-an-array',
         },
@@ -133,7 +133,7 @@ describe('API Routes - POST /calculate', () => {
 
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: invalidPayload,
       });
 
@@ -145,7 +145,7 @@ describe('API Routes - POST /calculate', () => {
     it('should return 400 for invalid JSON', async () => {
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: 'invalid json',
         headers: {
           'content-type': 'application/json',
@@ -156,11 +156,11 @@ describe('API Routes - POST /calculate', () => {
     });
   });
 
-  describe('POST /api/calculate - Edge cases', () => {
+  describe('POST /v1/calculate - Edge cases', () => {
     it('should trim whitespace from movie titles', async () => {
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: {
           movies: ['  Back to the Future 1  ', '  Back to the Future 2  '],
         },
@@ -174,7 +174,7 @@ describe('API Routes - POST /calculate', () => {
     it('should filter out empty strings', async () => {
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: {
           movies: ['', '  ', 'Back to the Future 1'],
         },
@@ -189,7 +189,7 @@ describe('API Routes - POST /calculate', () => {
       const movies = Array(100).fill('Back to the Future 1');
       const response = await server.inject({
         method: 'POST',
-        url: '/api/calculate',
+        url: '/v1/calculate',
         payload: { movies },
       });
 
@@ -215,14 +215,15 @@ describe('API Routes - GET /health', () => {
   it('should return 200 and health status', async () => {
     const response = await server.inject({
       method: 'GET',
-      url: '/health',
+      url: '/v1/health',
     });
 
     expect(response.statusCode).toBe(200);
     const data = JSON.parse(response.payload);
     expect(data.status).toBe('ok');
     expect(data).toHaveProperty('timestamp');
-    expect(data).toHaveProperty('uptime');
+    expect(data).toHaveProperty('version');
+    expect(data.apiVersion).toBe('v1');
   });
 });
 
@@ -277,7 +278,7 @@ describe('API Routes - CORS', () => {
   it('should include CORS headers', async () => {
     const response = await server.inject({
       method: 'OPTIONS',
-      url: '/api/calculate',
+      url: '/v1/calculate',
       headers: {
         origin: 'http://localhost:3000',
         'access-control-request-method': 'POST',

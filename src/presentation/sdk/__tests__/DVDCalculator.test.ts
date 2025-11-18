@@ -1,5 +1,5 @@
+import { MovieType } from '../../../domain/entities/Movie';
 import { DVDCalculator } from '../DVDCalculator';
-import { MovieType } from '../../domain/entities/Movie';
 
 describe('DVDCalculator SDK', () => {
   let calculator: DVDCalculator;
@@ -91,38 +91,6 @@ describe('DVDCalculator SDK', () => {
       expect(result.movies[0].title).toBe('Back to the Future');
       expect(result.movies[0].type).toBe(MovieType.BACK_TO_THE_FUTURE);
       expect(result.movies[0].basePrice).toBe(15);
-    });
-  });
-
-  describe('parseMovie()', () => {
-    it('should parse Back to the Future movie', () => {
-      const movie = calculator.parseMovie('Back to the Future');
-
-      expect(movie.title).toBe('Back to the Future');
-      expect(movie.type).toBe(MovieType.BACK_TO_THE_FUTURE);
-      expect(movie.getBasePrice()).toBe(15);
-    });
-
-    it('should parse Back to the Future II with episode number', () => {
-      const movie = calculator.parseMovie('Back to the Future 2');
-
-      expect(movie.title).toBe('Back to the Future 2');
-      expect(movie.episode).toBe(2);
-    });
-
-    it('should parse Back to the Future III with episode number', () => {
-      const movie = calculator.parseMovie('Back to the Future 3');
-
-      expect(movie.title).toBe('Back to the Future 3');
-      expect(movie.episode).toBe(3);
-    });
-
-    it('should parse non-BTTF movie', () => {
-      const movie = calculator.parseMovie('Other Movie');
-
-      expect(movie.title).toBe('Other Movie');
-      expect(movie.type).toBe(MovieType.OTHER);
-      expect(movie.getBasePrice()).toBe(20);
     });
   });
 
