@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EventEmitter } from 'events';
 import { CLIHandler } from '../index';
-import { DVDCalculatorService } from '../../../application/services/DVDCalculatorService';
-import { InputParser } from '../../../infrastructure/adapters/InputParser';
+import { DVDCalculatorService } from '@application/services/DVDCalculatorService';
+import { InputParser } from '@infrastructure/adapters/InputParser';
 
 // Mock readline
 let mockReadlineInterface: any;

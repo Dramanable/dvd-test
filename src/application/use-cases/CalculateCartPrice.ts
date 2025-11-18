@@ -1,5 +1,5 @@
-import { Cart } from '../../domain/entities/Cart';
-import { Movie, MovieType } from '../../domain/entities/Movie';
+import { Cart } from '@domain/entities/Cart';
+import { Movie, MovieType } from '@domain/entities/Movie';
 
 /**
  * Use case for calculating the total price of a shopping cart

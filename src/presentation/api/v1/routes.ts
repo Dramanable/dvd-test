@@ -2,8 +2,8 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import {
   DVDCalculatorService,
   type CalculationDetails,
-} from '../../../application/services/DVDCalculatorService';
-import { ArrayInputParser } from '../../../infrastructure/adapters/ArrayInputParser';
+} from '@application/services/DVDCalculatorService';
+import { ArrayInputParser } from '@infrastructure/adapters/ArrayInputParser';
 
 /**
  * Build API response using DVDCalculatorService with dependency inversion

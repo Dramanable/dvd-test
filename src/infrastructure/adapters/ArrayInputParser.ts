@@ -1,4 +1,4 @@
-import { IInputParser } from '../../application/ports/IInputParser';
+import { IInputParser } from '@application/ports/IInputParser';
 
 /**
  * Array Input Parser - Adapter for REST API

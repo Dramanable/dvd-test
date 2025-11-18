@@ -41,23 +41,23 @@ export { DVDCalculator } from './DVDCalculator';
 export type { CalculationResult, CartInfo } from './DVDCalculator';
 
 // Domain entities
-export { Cart } from '../../domain/entities/Cart';
-export { Movie, MovieType } from '../../domain/entities/Movie';
+export { Cart } from '@domain/entities/Cart';
+export { Movie, MovieType } from '@domain/entities/Movie';
 
 // Use cases (for advanced usage)
-export { CalculateCartPrice } from '../../application/use-cases/CalculateCartPrice';
+export { CalculateCartPrice } from '@application/use-cases/CalculateCartPrice';
 
 // Application layer (for DI and custom implementations)
-export type { CacheStats, ICache } from '../../application/ports/ICache';
-export type { IInputParser } from '../../application/ports/IInputParser';
+export type { CacheStats, ICache } from '@application/ports/ICache';
+export type { IInputParser } from '@application/ports/IInputParser';
 export {
   DVDCalculatorService as DVDCalculatorApp,
   DVDCalculatorService,
-} from '../../application/services/DVDCalculatorService';
+} from '@application/services/DVDCalculatorService';
 
 // Infrastructure (concrete implementations)
-export { InMemoryCache } from '../../infrastructure/adapters/InMemoryCache';
-export type { InMemoryCacheConfig } from '../../infrastructure/adapters/InMemoryCache';
-export { InputParser } from '../../infrastructure/adapters/InputParser';
-export { RedisCache } from '../../infrastructure/adapters/RedisCache';
-export type { CacheConfig } from '../../infrastructure/adapters/RedisCache';
+export { InMemoryCache } from '@infrastructure/adapters/InMemoryCache';
+export type { InMemoryCacheConfig } from '@infrastructure/adapters/InMemoryCache';
+export { InputParser } from '@infrastructure/adapters/InputParser';
+export { RedisCache } from '@infrastructure/adapters/RedisCache';
+export type { CacheConfig } from '@infrastructure/adapters/RedisCache';

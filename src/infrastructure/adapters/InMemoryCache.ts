@@ -1,4 +1,4 @@
-import { CacheStats, ICache } from '../../application/ports/ICache';
+import { CacheStats, ICache } from '@application/ports/ICache';
 
 export interface InMemoryCacheConfig {
   ttl?: number; // Time-to-live en secondes (défaut: 1h)

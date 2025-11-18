@@ -1,5 +1,5 @@
-import { Cart } from '../../domain/entities/Cart';
-import { Movie, MovieType } from '../../domain/entities/Movie';
+import { Cart } from '@domain/entities/Cart';
+import { Movie, MovieType } from '@domain/entities/Movie';
 import { IInputParser } from '../ports/IInputParser';
 import { CalculateCartPrice } from '../use-cases/CalculateCartPrice';
 

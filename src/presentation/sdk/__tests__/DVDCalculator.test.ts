@@ -1,4 +1,4 @@
-import { MovieType } from '../../../domain/entities/Movie';
+import { MovieType } from '@domain/entities/Movie';
 import { DVDCalculator } from '../DVDCalculator';
 
 describe('DVDCalculator SDK', () => {

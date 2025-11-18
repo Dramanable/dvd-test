@@ -5,7 +5,7 @@ import fastifyRateLimit from '@fastify/rate-limit';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import Fastify, { FastifyInstance } from 'fastify';
-import { RedisCache } from '../../infrastructure/adapters/RedisCache';
+import { RedisCache } from '@infrastructure/adapters/RedisCache';
 import { registerRoutes } from './routes';
 import { swaggerOptions, swaggerUiOptions } from './swagger';
 

@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { CacheStats, ICache } from '../application/ports/ICache';
+import { CacheStats, ICache } from '@application/ports/ICache';
 
 export interface CacheConfig {
   host: string;
