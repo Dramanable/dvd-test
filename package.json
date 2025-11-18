@@ -27,7 +27,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
+    "start:api": "node dist/api/index.js",
     "dev": "ts-node src/index.ts",
+    "dev:api": "ts-node src/api/index.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -84,5 +86,11 @@
       "eslint --fix",
       "jest --bail --findRelatedTests"
     ]
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.1.0",
+    "@fastify/swagger": "^9.6.1",
+    "@fastify/swagger-ui": "^5.2.3",
+    "fastify": "^5.6.2"
   }
 }
