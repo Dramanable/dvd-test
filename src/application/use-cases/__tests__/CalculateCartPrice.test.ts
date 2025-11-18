@@ -9,11 +9,7 @@ describe('CalculateCartPrice Use Case', () => {
 
   describe('Specification examples', () => {
     it('should return 36 for 3 different BTTF episodes', () => {
-      const movieTitles = [
-        'Back to the Future 1',
-        'Back to the Future 2',
-        'Back to the Future 3'
-      ];
+      const movieTitles = ['Back to the Future 1', 'Back to the Future 2', 'Back to the Future 3'];
 
       const result = calculateCartPrice.execute(movieTitles);
 
@@ -21,10 +17,7 @@ describe('CalculateCartPrice Use Case', () => {
     });
 
     it('should return 27 for 2 different BTTF episodes', () => {
-      const movieTitles = [
-        'Back to the Future 1',
-        'Back to the Future 3'
-      ];
+      const movieTitles = ['Back to the Future 1', 'Back to the Future 3'];
 
       const result = calculateCartPrice.execute(movieTitles);
 
@@ -44,7 +37,7 @@ describe('CalculateCartPrice Use Case', () => {
         'Back to the Future 1',
         'Back to the Future 2',
         'Back to the Future 3',
-        'Back to the Future 2'
+        'Back to the Future 2',
       ];
 
       const result = calculateCartPrice.execute(movieTitles);
@@ -57,7 +50,7 @@ describe('CalculateCartPrice Use Case', () => {
         'Back to the Future 1',
         'Back to the Future 2',
         'Back to the Future 3',
-        'La chèvre'
+        'La chèvre',
       ];
 
       const result = calculateCartPrice.execute(movieTitles);
@@ -82,10 +75,7 @@ describe('CalculateCartPrice Use Case', () => {
     });
 
     it('should handle case sensitivity', () => {
-      const movieTitles = [
-        'back to the future 1',
-        'BACK TO THE FUTURE 2'
-      ];
+      const movieTitles = ['back to the future 1', 'BACK TO THE FUTURE 2'];
 
       const result = calculateCartPrice.execute(movieTitles);
 
@@ -93,10 +83,7 @@ describe('CalculateCartPrice Use Case', () => {
     });
 
     it('should handle extra whitespace', () => {
-      const movieTitles = [
-        '  Back to the Future 1  ',
-        'Back to the Future 2'
-      ];
+      const movieTitles = ['  Back to the Future 1  ', 'Back to the Future 2'];
 
       const result = calculateCartPrice.execute(movieTitles);
 

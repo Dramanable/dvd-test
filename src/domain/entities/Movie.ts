@@ -3,7 +3,7 @@
  */
 export enum MovieType {
   BACK_TO_THE_FUTURE = 'BACK_TO_THE_FUTURE',
-  OTHER = 'OTHER'
+  OTHER = 'OTHER',
 }
 
 /**

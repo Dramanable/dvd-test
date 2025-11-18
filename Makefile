@@ -20,6 +20,12 @@ lint: ## Vérifie la qualité du code avec ESLint
 lint-fix: ## Corrige automatiquement les problèmes ESLint
 	npm run lint:fix
 
+format: ## Formate le code avec Prettier
+	npm run format
+
+format-check: ## Vérifie le formatage sans modifier
+	npm run format:check
+
 commit: ## Créer un commit sémantique avec Commitizen
 	npm run commit
 
@@ -66,4 +72,4 @@ all: install build lint test validate ## Installation complète et validation
 
 quick-start: install build run ## Démarrage rapide (install + build + run exemple)
 
-ci: install lint build test ## Pipeline CI (lint + build + test)
+ci: install lint format-check build test ## Pipeline CI (format check + lint + build + test)

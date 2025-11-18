@@ -26,7 +26,7 @@ Back to the Future 3`;
       expect(result).toEqual([
         'Back to the Future 1',
         'Back to the Future 2',
-        'Back to the Future 3'
+        'Back to the Future 3',
       ]);
     });
 
@@ -37,10 +37,7 @@ Back to the Future 2`;
 
       const result = parser.parse(input);
 
-      expect(result).toEqual([
-        'Back to the Future 1',
-        'Back to the Future 2'
-      ]);
+      expect(result).toEqual(['Back to the Future 1', 'Back to the Future 2']);
     });
 
     it('should handle leading/trailing whitespace', () => {
@@ -49,10 +46,7 @@ Back to the Future 2`;
 
       const result = parser.parse(input);
 
-      expect(result).toEqual([
-        'Back to the Future 1',
-        'Back to the Future 2'
-      ]);
+      expect(result).toEqual(['Back to the Future 1', 'Back to the Future 2']);
     });
 
     it('should return empty array for empty input', () => {

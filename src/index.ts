@@ -52,7 +52,7 @@ async function main() {
 function readStdin(): Promise<string> {
   return new Promise((resolve) => {
     let data = '';
-    process.stdin.on('data', chunk => {
+    process.stdin.on('data', (chunk) => {
       data += chunk;
     });
     process.stdin.on('end', () => {
@@ -69,7 +69,7 @@ function readInteractive(): Promise<string> {
     const lines: string[] = [];
     const rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
 
     rl.on('line', (line) => {
@@ -83,7 +83,7 @@ function readInteractive(): Promise<string> {
 }
 
 // Run the application
-main().catch(error => {
+main().catch((error) => {
   console.error('Unexpected error:', error);
   process.exit(1);
 });

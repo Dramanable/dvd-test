@@ -37,8 +37,8 @@ export class Cart {
       return 0;
     }
 
-    const bttfMovies = this.movies.filter(m => m.isBackToTheFuture());
-    const otherMovies = this.movies.filter(m => !m.isBackToTheFuture());
+    const bttfMovies = this.movies.filter((m) => m.isBackToTheFuture());
+    const otherMovies = this.movies.filter((m) => !m.isBackToTheFuture());
 
     // Calculate price for other movies (no discount)
     const otherMoviesTotal = otherMovies.reduce((sum, movie) => sum + movie.getBasePrice(), 0);
@@ -78,7 +78,7 @@ export class Cart {
    */
   private countUniqueEpisodes(bttfMovies: Movie[]): number {
     const episodes = new Set<number>();
-    
+
     for (const movie of bttfMovies) {
       if (movie.episode !== undefined) {
         episodes.add(movie.episode);
