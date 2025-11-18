@@ -3,6 +3,27 @@
   "version": "1.0.0",
   "description": "Back to the Future DVD shop price calculator with TDD and Clean Architecture",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/sdk/index.js",
+      "require": "./dist/sdk/index.js",
+      "types": "./dist/sdk/index.d.ts"
+    },
+    "./cli": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "bin": {
+    "dvd-calculator": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -21,7 +42,10 @@
     "dvd",
     "calculator",
     "clean-architecture",
-    "tdd"
+    "tdd",
+    "sdk",
+    "back-to-the-future",
+    "typescript"
   ],
   "author": "",
   "license": "ISC",

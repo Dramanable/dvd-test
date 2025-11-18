@@ -47,6 +47,6 @@ module.exports = [
     },
   },
   {
-    ignores: ['dist/', 'coverage/', 'node_modules/', '*.config.js', 'validate.sh'],
+    ignores: ['dist/', 'coverage/', 'node_modules/', '*.config.js', 'validate.sh', 'examples/'],
   },
 ];

@@ -96,7 +96,8 @@ export class Cart {
   private getDiscount(uniqueEpisodes: number): number {
     if (uniqueEpisodes >= 3) {
       return 0.2; // 20% discount
-    } else if (uniqueEpisodes === 2) {
+    }
+    if (uniqueEpisodes === 2) {
       return 0.1; // 10% discount
     }
     return 0; // No discount
