@@ -21,12 +21,12 @@ npm run start:api
 npm run dev:api
 ```
 
-Le serveur démarre par défaut sur `http://localhost:3000`.
+Le serveur démarre par défaut sur `http://localhost:5000`.
 
 ### Variables d'environnement
 
 ```bash
-PORT=3000        # Port du serveur (défaut: 3000)
+PORT=5000        # Port du serveur (défaut: 5000)
 HOST=0.0.0.0     # Host du serveur (défaut: 0.0.0.0)
 ```
 
@@ -35,13 +35,13 @@ HOST=0.0.0.0     # Host du serveur (défaut: 0.0.0.0)
 Une fois le serveur démarré, accédez à la documentation Swagger UI :
 
 ```
-http://localhost:3000/api/docs
+http://localhost:5000/api/docs
 ```
 
 La spécification OpenAPI JSON est disponible à :
 
 ```
-http://localhost:3000/api/docs/json
+http://localhost:5000/api/docs/json
 ```
 
 ## 🔌 Endpoints
@@ -145,18 +145,18 @@ Vérifie l'état du serveur.
 
 ```bash
 # Calculer le prix de 3 DVDs
-curl -X POST http://localhost:3000/api/calculate \
+curl -X POST http://localhost:5000/api/calculate \
   -H "Content-Type: application/json" \
   -d '{"movies": ["Back to the Future", "Back to the Future II", "Back to the Future III"]}'
 
 # Health check
-curl http://localhost:3000/health
+curl http://localhost:5000/health
 ```
 
 ### JavaScript (Fetch)
 
 ```javascript
-const response = await fetch('http://localhost:3000/api/calculate', {
+const response = await fetch('http://localhost:5000/api/calculate', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -180,7 +180,7 @@ console.log(result);
 import requests
 
 response = requests.post(
-    'http://localhost:3000/api/calculate',
+    'http://localhost:5000/api/calculate',
     json={
         'movies': [
             'Back to the Future',
@@ -258,7 +258,7 @@ Les remises sont calculées automatiquement :
 docker build -t dvd-calculator-api .
 
 # Run
-docker run -p 3000:3000 dvd-calculator-api
+docker run -p 5000:5000 dvd-calculator-api
 ```
 
 ## 📝 Licence
