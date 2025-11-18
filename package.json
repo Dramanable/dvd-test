@@ -22,7 +22,7 @@
     }
   },
   "bin": {
-    "dvd-calculator": "./dist/presentation/cli/index.js"
+    "dvd-calculator": "./dist/cli.js"
   },
   "files": [
     "dist",
@@ -30,11 +30,11 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc",
-    "start:cli": "node dist/presentation/cli/index.js",
-    "start:api": "node dist/presentation/api/index.js",
-    "dev:cli": "ts-node src/presentation/cli/index.ts",
-    "dev:api": "ts-node src/presentation/api/index.ts",
+    "build": "tsc && cp scripts/cli-loader.js dist/cli.js",
+    "start:cli": "node dist/cli.js",
+    "start:api": "node -r tsconfig-paths/register dist/presentation/api/index.js",
+    "dev:cli": "ts-node -r tsconfig-paths/register src/presentation/cli/index.ts",
+    "dev:api": "ts-node -r tsconfig-paths/register src/presentation/api/index.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
