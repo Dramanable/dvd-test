@@ -31,10 +31,13 @@ RUN npm ci --only=production --ignore-scripts
 
 # Copier les fichiers compilés depuis le stage builder
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/tsconfig.json ./tsconfig.json
 
-# Définir l'entrypoint pour le CLI
-ENTRYPOINT ["node", "dist/cli.js"]
+# Exposer le port de l'API
+EXPOSE 3000
 
-# Par défaut, mode interactif si aucun argument
-CMD []
+# Variable d'environnement pour le port
+ENV PORT=3000
+ENV NODE_ENV=production
+
+# Démarrer l'API REST
+CMD ["node", "dist/presentation/api/index.js"]
