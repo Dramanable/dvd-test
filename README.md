@@ -2,11 +2,11 @@
 
 
 
-![CI](https://github.com/VOTRE_USERNAME/ekinox/workflows/CI/badge.svg)
+![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)
 
 ![Node](https://img.shields.io/badge/node-24.x-brightgreen)
 
-![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)![CI](https://github.com/VOTRE_USERNAME/ekinox/workflows/CI/badge.svg)
+![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)
 
 ![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen)
 
