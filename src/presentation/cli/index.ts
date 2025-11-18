@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
+import { DVDCalculatorService } from '@application/services/DVDCalculatorService';
+import { InputParser } from '@infrastructure/adapters/InputParser';
 import * as fs from 'fs';
 import * as readline from 'readline';
 import type { ReadStream, WriteStream } from 'tty';
-import { DVDCalculatorService } from '@application/services/DVDCalculatorService';
-import { InputParser } from '@infrastructure/adapters/InputParser';
 
 /**
  * CLI handler - separated for testing
