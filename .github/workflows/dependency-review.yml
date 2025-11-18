@@ -1,0 +1,41 @@
+name: Dependency Review
+
+on:
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Dependency Review
+      uses: actions/dependency-review-action@v4
+      with:
+        fail-on-severity: moderate
+        
+  audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+        cache: 'npm'
+        
+    - name: Run npm audit
+      run: npm audit --audit-level=moderate
+      continue-on-error: true

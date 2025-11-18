@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  dvd-calculator:
+    build: .
+    image: dvd-calculator:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./examples:/app/examples:ro
