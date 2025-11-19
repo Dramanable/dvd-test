@@ -1,1638 +1,228 @@
-# DVD Calculator - Clean Architecture# DVD Calculator - Clean Architecture
+# DVD Calculator - Clean Architecture
 
+![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)
+![Tests](https://img.shields.io/badge/tests-259%20passing-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-83.72%25-brightgreen)
+![Node](https://img.shields.io/badge/node-24.x-brightgreen)
+![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)
+![License](https://img.shields.io/badge/license-ISC-blue)
 
-
-![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)
-
-![Tests](https://img.shields.io/badge/tests-166%20passing-brightgreen)![Tests](https://img.shields.io/badge/tests-166%20passing-brightgreen)
-
-![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
-
-![Node](https://img.shields.io/badge/node-24.x-brightgreen)![Node](https://img.shields.io/badge/node-24.x-brightgreen)
-
-![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)
-
-![License](https://img.shields.io/badge/license-ISC-blue)![License](https://img.shields.io/badge/license-ISC-blue)
-
-
-
-Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
-
-
+Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
 
 **Architecture Clean avec Dependency Inversion** : 0 logique métier dans la présentation.
 
+## 📚 Documentation
 
-
-## 📚 Documentation## 🚀 Démarrage rapide![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
-
-
-
+- **[docs/INDEX.md](./docs/INDEX.md)** - 📑 Index complet de la documentation
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Architecture Clean détaillée avec diagrammes
-
+- **[API.md](./API.md)** - Documentation de l'API REST
+- **[SDK.md](./SDK.md)** - Guide d'utilisation du SDK
+- **[DOCKER.md](./DOCKER.md)** - Déploiement avec Docker et Docker Compose
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Guide de contribution
+- **[CHANGELOG.md](./CHANGELOG.md)** - Historique des versions
 
-- **[COMMITS.md](./COMMITS.md)** - Conventional Commits```bash![License](https://img.shields.io/badge/license-ISC-blue)
+## 🚀 Démarrage rapide
 
+```bash
+# Installation complète + build + tests
+npm install
+npm run build
+npm test
 
+# Validation complète (lint + build + tests + exemples)
+./validate.sh
 
-## 🚀 Démarrage rapide# Voir toutes les commandes disponibles
-
-
-
-```bashmake help## 🚀 Démarrage rapideCalculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
-
-# Installation + Build + Test
-
-make quick-start
-
-
-
-# Pipeline CI complet# Démarrage rapide completCalculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
-
-make ci
-
-make quick-start
-
-# Voir toutes les commandes
-
-make help
-
+# Avec Docker
+docker build -t dvd-calculator .
+docker run --rm dvd-calculator examples/example1.txt
 ```
-
-# Pipeline CI complet
 
 ## 💰 Règles métier
 
-make ci## 🚀 Démarrage rapide
-
 **Tarifs** :
-
 - Back to the Future : 15€
-
 - Autres films : 20€
 
-# Build et test avec Docker```bash
-
 **Promotions (BTTF uniquement)** :
-
-- 2 volets différents → 10% de réduction sur tous les DVDs BTTFmake docker-build
-
+- 2 volets différents → 10% de réduction sur tous les DVDs BTTF
 - 3 volets différents → 20% de réduction sur tous les DVDs BTTF
-
-make docker-test```bash
 
 ## 📊 Exemples
 
-```
-
-| Panier | Calcul | Prix |
-
-|--------|--------|------|# Voir toutes les commandes disponibles# Voir toutes les commandes disponibles
-
+| Panier | Calcul | Résultat |
+|--------|--------|----------|
 | 3 volets BTTF | (15×3)×0.8 | **36€** |
-
-| 2 volets BTTF | (15×2)×0.9 | **27€** |## 📋 Commandes Makefile
-
+| 2 volets BTTF | (15×2)×0.9 | **27€** |
 | 1 volet BTTF | 15×1 | **15€** |
-
-| 4 DVDs BTTF (3 volets) | (15×4)×0.8 | **48€** |make help
-
+| 4 DVDs (3 volets) | (15×4)×0.8 | **48€** |
 | 3 BTTF + 1 autre | (15×3)×0.8+20 | **56€** |
-
-| Commande | Description |
 
 ## 🏗️ Architecture (Résumé)
 
-|----------|-------------|make help## 🚀 Démarrage rapide avec DockerCalculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
-
 **Clean Architecture** avec séparation stricte des couches :
 
-| `make help` | Affiche l'aide |
-
 ```
-
-Presentation (CLI/API/SDK)| `make quick-start` | Installation + build + exécution |# Démarrage rapide complet
-
+Presentation (CLI/API/SDK)
     ↓ injecte adapters
-
-Application (DVDCalculatorService + Ports)| `make install` | Installe les dépendances |
-
+Application (DVDCalculatorService + Ports)
     ↓ dépend de
-
-Infrastructure (Adapters: InputParser, Cache)| `make build` | Compile le projet TypeScript |make quick-start
-
+Infrastructure (Adapters: InputParser, Cache)
     ↓ utilise
-
-Domain (Movie, Cart - 0 dépendance)| `make lint` | Vérifie la qualité du code (ESLint) |
-
+Domain (Movie, Cart - 0 dépendance)
 ```
-
-| `make lint-fix` | Corrige automatiquement les problèmes |
 
 **Principes appliqués** :
-
-- ✅ **Dependency Inversion Principle** - Les dépendances pointent vers les abstractions| `make commit` | Créer un commit sémantique (Commitizen) |
-
+- ✅ **Dependency Inversion Principle** - Les dépendances pointent vers les abstractions
 - ✅ **Zero business logic in presentation** - Uniquement orchestration
-
-- ✅ **Single Responsibility Principle** - Une classe = une responsabilité| `make test` | Lance les 34 tests |# Pipeline CI complet# Démarrage rapide complet
-
-- ✅ **Test-Driven Development** - 166 tests avec couverture 100%
-
-| `make test-coverage` | Tests avec couverture |
+- ✅ **Single Responsibility Principle** - Une classe = une responsabilité
+- ✅ **Test-Driven Development** - 259 tests avec couverture >83%
 
 **Voir [ARCHITECTURE.md](./ARCHITECTURE.md) pour les détails complets.**
 
-| `make validate` | Validation complète (script) |make ci
-
-## 📦 Commandes Make
-
-| `make run` | Exécute avec example1.txt |
-
-| Commande | Description |
-
-|----------|-------------|| `make docker-build` | Build l'image Docker |make quick-start
-
-| `make help` | Affiche l'aide complète |
-
-| `make quick-start` | Installation + build + exécution || `make docker-run` | Exécute avec Docker |
-
-| `make install` | Installe les dépendances |
-
-| `make build` | Compile le projet TypeScript || `make docker-test` | Teste tous les exemples Docker |# Build et test avec Docker
-
-| `make test` | Lance les 166 tests |
-
-| `make lint` | Vérifie ESLint || `make docker-interactive` | Mode interactif Docker |
-
-| `make lint-fix` | Corrige automatiquement |
-
-| `make ci` | Pipeline CI complet || `make ci` | Pipeline CI (lint + build + test) |make docker-build```bash[![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen)](.)
-
-| `make docker-build` | Build l'image Docker |
-
-| `make docker-test` | Teste avec Docker || `make all` | Installation complète + validation |
-
-
-
-## 📝 Utilisation| `make clean` | Nettoie les fichiers générés |make docker-test
-
-
+## 📝 Utilisation
 
 ### Mode CLI
 
-
-
-```bash## 💰 Règles métier```# Build et test avec Docker
-
+```bash
 # Fichier d'entrée
+node dist/cli.js examples/example1.txt
 
-node dist/index.js examples/example1.txt
-
-
-
-# Pipe**Tarifs** :
-
-echo -e "Back to the Future 1\nBack to the Future 2" | node dist/index.js
-
-- Back to the Future : 15€
+# Pipe
+echo -e "Back to the Future 1\nBack to the Future 2" | node dist/cli.js
 
 # Mode interactif
-
-node dist/index.js- Autres films : 20€## 📋 Commandes Makefilemake docker-build# Build l'image
-
+node dist/cli.js
 ```
-
-
 
 ### Mode API REST
 
-**Promotions (BTTF uniquement)** :
-
 ```bash
+npm start
 
-npm start- 2 volets différents → 10% de réduction sur tous les DVDs BTTF
-
-curl -X POST http://localhost:3000/api/v1/calculate \
-
-  -H "Content-Type: application/json" \- 3 volets différents → 20% de réduction sur tous les DVDs BTTF| Commande | Description |make docker-test
-
+curl -X POST http://localhost:3000/v1/calculate \
+  -H "Content-Type: application/json" \
   -d '{"movies": ["Back to the Future 1", "Back to the Future 2"]}'
-
 ```
 
+**Documentation interactive** : http://localhost:3000/api/docs
 
-
-### Mode SDK## 📊 Exemples|----------|-------------|
-
-
+### Mode SDK
 
 ```typescript
-
-import { DVDCalculator } from './presentation/sdk/DVDCalculator';
-
-| Panier | Calcul | Résultat || `make help` | Affiche l'aide |```docker build -t dvd-calculator .## Installation et lancement[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](.)
+import { DVDCalculator } from '@ekinox/dvd-calculator';
 
 const calculator = new DVDCalculator();
-
-calculator|--------|--------|----------|
-
+calculator
   .addMovie('Back to the Future 1')
+  .addMovie('Back to the Future 2');
 
-  .addMovie('Back to the Future 2');| 3 volets BTTF | (15×3)×0.8 | **36€** || `make quick-start` | Installation + build + exécution |
-
-
-
-const total = calculator.getTotal(); // 27| 2 volets BTTF | (15×2)×0.9 | **27€** |
-
+const total = calculator.getTotal(); // 27€
 ```
 
-| 1 volet BTTF | 15×1 | **15€** || `make install` | Installe les dépendances |
+**Voir [SDK.md](./SDK.md) pour toutes les fonctionnalités.**
 
 ## 🧪 Tests
 
-| 4 DVDs (3 volets) | (15×4)×0.8 | **48€** |
-
-**166 tests** avec couverture 100% :
-
-| 3 BTTF + 1 autre | (15×3)×0.8+20 | **56€** || `make build` | Compile le projet TypeScript |
+**259 tests** avec couverture >83% :
 
 ```bash
-
 npm test              # Tous les tests
-
 npm run test:coverage # Avec couverture
-
-npm run test:watch    # Mode watch## 🧪 Tests & Qualité| `make lint` | Vérifie la qualité du code (ESLint) |## 📋 Commandes Makefile
-
-make validate         # Validation complète
-
+npm run test:watch    # Mode watch
+./validate.sh         # Validation complète
 ```
 
-
-
-**Distribution** :### Tests| `make lint-fix` | Corrige automatiquement les problèmes |
-
+**Distribution** :
 - Domain : 68 tests (Movie, Cart)
-
 - Application : 27 tests (Services, Use Cases)
-
 - Infrastructure : 50 tests (Adapters)
+- Presentation : 114 tests (CLI, API, SDK, E2E)
 
-- Presentation : 21 tests (CLI, API, SDK)```bash| `make test` | Lance les 34 tests |
+**E2E Tests** :
+- API E2E : 16 tests (endpoints, CORS, performance)
+- SDK E2E : 35 tests (calculate, fluent API, scénarios réels)
 
+## 🐳 Docker
 
-
-## 🐳 Dockermake test              # 34 tests
-
-
-
-```bashmake test-coverage     # Couverture 100%| `make test-coverage` | Tests avec couverture |
-
+```bash
 # Build
+docker build -t dvd-calculator .
 
-docker build -t dvd-calculator .make validate          # Validation complète
-
-
-
-# Exécuter avec fichier```| `make validate` | Validation complète (script) || Commande | Description |# Utiliser avec un fichier
-
+# CLI avec fichier
 docker run --rm -v $(pwd)/examples:/app/examples dvd-calculator examples/example1.txt
 
+# CLI mode interactif
+docker run --rm -it dvd-calculator
 
-
-# Mode interactif
-
-docker run --rm -it dvd-calculator**Résultats** :| `make run` | Exécute avec example1.txt |
-
-
-
-# Avec pipe- ✅ 34 tests passent
-
+# CLI avec pipe
 echo -e "Back to the Future 1\nBack to the Future 2" | docker run --rm -i dvd-calculator
 
-```- ✅ 4 test suites| `make docker-build` | Build l'image Docker ||----------|-------------|
+# API REST
+docker build -f Dockerfile.api -t dvd-calculator-api .
+docker run --rm -p 3000:3000 dvd-calculator-api
+```
 
+**Voir [DOCKER.md](./DOCKER.md) pour Docker Compose et production.**
 
+## 🎯 Points forts
 
-## 🎯 Points forts- ✅ Couverture 100%
-
-
-
-### Architecture- ✅ 5 exemples validés| `make docker-run` | Exécute avec Docker |
-
-
-
-- ✅ **Clean Architecture** stricte avec 4 couches- ✅ Structure `__tests__` organisée
-
+### Architecture
+- ✅ **Clean Architecture** stricte avec 4 couches
 - ✅ **Dependency Inversion** - Ports & Adapters pattern
-
-- ✅ **No business logic in presentation** - 100% respecté| `make docker-test` | Teste tous les exemples Docker || `make help` | Affiche l'aide |docker run --rm -v $(pwd)/examples:/app/examples dvd-calculator examples/example1.txt
-
+- ✅ **No business logic in presentation** - 100% respecté
 - ✅ **Domain pur** - 0 dépendance externe
 
-### Qualité du code (ESLint)
-
 ### Qualité
+- ✅ **259 tests** - TDD from start
+- ✅ **83.72% coverage** - Tous les chemins testés
+- ✅ **TypeScript strict** - Pas de \`any\`
+- ✅ **ESLint** - Code style cohérent
 
-| `make docker-interactive` | Mode interactif Docker |
-
-- ✅ **166 tests** - TDD from start
-
-- ✅ **100% coverage** - Tous les chemins testés```bash
-
-- ✅ **TypeScript strict** - Pas de `any`
-
-- ✅ **ESLint** - Code style cohérentmake lint              # Vérification ESLint| `make ci` | Pipeline CI (lint + build + test) || `make quick-start` | Installation + build + exécution |
-
-
-
-### Flexibilitémake lint-fix          # Correction automatique
-
-
-
-- ✅ **3 interfaces** - CLI, API REST, SDK```| `make all` | Installation complète + validation |
-
+### Flexibilité
+- ✅ **3 interfaces** - CLI, API REST, SDK
 - ✅ **Multiple adapters** - InputParser, ArrayInputParser, Cache
-
 - ✅ **Facilement extensible** - Ajouter GraphQL, gRPC, etc.
 
+## 📁 Structure
 
-
-## 📁 Structure**Règles appliquées** :| `make clean` | Nettoie les fichiers générés || `make install` | Installe les dépendances |### PrérequisCalculateur de prix pour une boutique de DVD avec promotions sur la saga "Back to the Future".
-
-
-
-```- ✅ TypeScript strict
-
+```
 src/
-
-├── domain/              # Entités métier (0 dépendance)- ✅ Pas de `any`
-
+├── domain/              # Entités métier (0 dépendance)
 │   └── entities/        # Movie, Cart
-
-├── application/         # Use Cases + Ports- ✅ Fonctions explicitement typées
-
+├── application/         # Use Cases + Ports
 │   ├── services/        # DVDCalculatorService
-
-│   ├── use-cases/       # CalculateCartPrice- ✅ Pas de variables inutilisées## 💰 Règles métier| `make build` | Compile le projet TypeScript |
-
+│   ├── use-cases/       # CalculateCartPrice
 │   └── ports/           # IInputParser, ICache
-
-├── infrastructure/      # Adapters- ✅ Pas de promesses non gérées
-
+├── infrastructure/      # Adapters
 │   └── adapters/        # InputParser, ArrayInputParser, Cache
-
-└── presentation/        # Interfaces utilisateur- ✅ Code style cohérent
-
+└── presentation/        # Interfaces utilisateur
     ├── cli/             # Mode ligne de commande
-
     ├── api/             # API REST Fastify
-
     └── sdk/             # Bibliothèque SDK
-
-```## 🏗️ Architecture**Tarifs** :| `make test` | Lance les 34 tests |# Utiliser avec pipe
-
-
+```
 
 ## 🤝 Contribution
 
-
-
-Voir [CONTRIBUTING.md](./CONTRIBUTING.md) pour les détails.**Clean Architecture + TDD** :- Back to the Future : 15€
-
-
+Voir [CONTRIBUTING.md](./CONTRIBUTING.md) pour les détails.
 
 **Commits sémantiques** (Conventional Commits) :
 
-
-
-```bash```- Autres films : 20€| `make test-coverage` | Tests avec couverture |
-
-make commit  # Guided commit avec Commitizen
-
-```src/
-
-
-
-## 📄 Licence├── domain/              # Entités métier (0 dépendance)
-
-
-
-ISC│   └── entities/
-
-
-
----│       ├── __tests__/   # Tests unitaires**Promotions (BTTF uniquement)** :| `make validate` | Validation complète (script) |echo -e "Back to the Future 1\nBack to the Future 2\nBack to the Future 3" | docker run --rm -i dvd-calculator- Node.js v18+ 
-
-
-
-**Node.js 24** • **TypeScript 5.3** • **Jest** • **ESLint** • **Clean Architecture** • **Docker** • **Fastify**│       ├── Movie.ts
-
-
-│       └── Cart.ts- 2 volets différents → 10% de réduction sur tous les DVDs BTTF
-
-├── application/         # Use cases, orchestration
-
-│   ├── use-cases/- 3 volets différents → 20% de réduction sur tous les DVDs BTTF| `make run` | Exécute avec example1.txt |
-
-│   │   ├── __tests__/   # Tests use cases
-
-│   │   └── CalculateCartPrice.ts
-
-│   ├── ports/           # Interfaces (IInputParser)
-
-│   └── DVDCalculatorApp.ts## 📊 Exemples| `make docker-build` | Build l'image Docker |
-
-├── infrastructure/      # Adapters
-
-│   ├── __tests__/       # Tests adapters
-
-│   └── InputParser.ts
-
-└── index.ts            # CLI + Dependency Injection| Panier | Calcul | Résultat || `make docker-run` | Exécute avec Docker |
-
-```
-
-|--------|--------|----------|
-
-**Principes appliqués** :
-
-- ✅ Test-Driven Development| 3 volets BTTF | (15×3)×0.8 | **36€** || `make docker-test` | Teste tous les exemples Docker |# Mode interactif- npm v9+## 📋 Table des matières
-
-- ✅ SOLID principles
-
-- ✅ Dependency Inversion| 2 volets BTTF | (15×2)×0.9 | **27€** |
-
-- ✅ Clean Architecture
-
-- ✅ TypeScript strict mode| 1 volet BTTF | 15×1 | **15€** || `make docker-interactive` | Mode interactif Docker |
-
-- ✅ ESLint (qualité du code)
-
-- ✅ Tests dans dossiers `__tests__`| 4 DVDs (3 volets) | (15×4)×0.8 | **48€** |
-
-
-
-## 🐳 Docker| 3 BTTF + 1 autre | (15×3)×0.8+20 | **56€** || `make all` | Installation complète + validation |docker run --rm -it dvd-calculator
-
-
-
-### Build et exécution
-
-
-
-```bash## 🧪 Tests & Qualité| `make clean` | Nettoie les fichiers générés |
-
-make docker-build
-
-make docker-run
-
-make docker-test
-
-```### Tests```
-
-
-
-### Commandes manuelles
-
-
-
-```bash```bash## 💰 Règles métier
-
-# Build
-
-docker build -t dvd-calculator .make test              # 34 tests
-
-
-
-# Exécuter avec fichiermake test-coverage     # Couverture 100%
-
-docker run --rm -v $(pwd)/examples:/app/examples dvd-calculator examples/example1.txt
-
-make validate          # Validation complète
-
-# Mode interactif
-
-docker run --rm -it dvd-calculator```**Tarifs** :
-
-
-
-# Avec pipe
-
-echo -e "Back to the Future 1\nBack to the Future 2" | docker run --rm -i dvd-calculator
-
-```**Résultats** :- Back to the Future : 15€### Avec Docker Compose### Installation- [Présentation](#présentation)
-
-
-
-## 📝 Utilisation- ✅ 34 tests passent
-
-
-
-### Mode 1 : Fichier- ✅ 4 test suites- Autres films : 20€
-
-
-
-```bash- ✅ Couverture 100%
-
-make run                          # Utilise example1.txt par défaut
-
-node dist/index.js input.txt      # Avec un fichier custom- ✅ 5 exemples validés
-
-```
-
-
-
-### Mode 2 : Pipe
-
-### Qualité du code (ESLint)**Promotions (BTTF uniquement)** :
-
 ```bash
-
-echo -e "Back to the Future 1\nBack to the Future 2" | node dist/index.js
-
+git commit -m "feat(cart): ajouter support multi-devises"
 ```
-
-```bash- 2 volets différents → 10% de réduction sur tous les DVDs BTTF```bash```bash- [Architecture](#architecture)
-
-### Mode 3 : Interactif
-
-make lint              # Vérification ESLint
-
-```bash
-
-node dist/index.jsmake lint-fix          # Correction automatique- 3 volets différents → 20% de réduction sur tous les DVDs BTTF
-
-# Entrez les titres ligne par ligne
-
-# Ctrl+D pour terminer```
-
-```
-
-# Build et run
-
-## 📦 Sans Makefile
-
-**Règles appliquées** :
-
-```bash
-
-# Installation- ✅ TypeScript strict## 📊 Exemples
-
-npm install
-
-npm run build- ✅ Pas de `any`
-
-
-
-# Tests & Lint- ✅ Fonctions explicitement typéesdocker-compose run --rm dvd-calculator examples/example1.txtnpm install- [Installation](#installation)
-
-npm run lint
-
-npm test- ✅ Pas de variables inutilisées
-
-./validate.sh
-
-- ✅ Pas de promesses non gérées| Panier | Calcul | Résultat |
-
-# Exécution
-
-node dist/index.js examples/example1.txt- ✅ Code style cohérent
-
-```
-
-|--------|--------|----------|
 
 ## 🔄 GitHub Actions CI/CD
-
-## 🏗️ Architecture
 
 Le projet utilise GitHub Actions pour l'intégration continue :
 
-| 3 volets BTTF | (15×3)×0.8 | **36€** |
-
-### Workflows disponibles
-
-**Clean Architecture + TDD** :
-
-#### CI (`.github/workflows/ci.yml`)
-
-Déclenché sur push/PR vers `main`, `master`, `develop` :| 2 volets BTTF | (15×2)×0.9 | **27€** |# Mode interactifnpm run build- [Utilisation](#utilisation)
-
-- ✅ **Lint** : Vérification ESLint
-
-- ✅ **Test** : Exécution des 34 tests + couverture```
-
-- ✅ **Build** : Compilation TypeScript
-
-- ✅ **Validate** : Validation des exemplessrc/| 1 volet BTTF | 15×1 | **15€** |
-
-- ✅ **Docker** : Build et test de l'image Docker
-
-├── domain/          # Entités métier (Movie, Cart) - 0 dépendance
-
-#### Release (`.github/workflows/release.yml`)
-
-Déclenché sur tags `v*` :├── application/     # Use cases, orchestration| 4 DVDs (3 volets) | (15×4)×0.8 | **48€** |docker-compose run --rm dvd-calculator
-
-- 📦 Création d'une archive de release
-
-- 🐳 Publication de l'image Docker├── infrastructure/  # Adapters (InputParser)
-
-- 📝 Notes de release automatiques
-
-└── index.ts        # CLI + Dependency Injection| 3 BTTF + 1 autre | (15×3)×0.8+20 | **56€** |
-
-#### Dependency Review (`.github/workflows/dependency-review.yml`)
-
-Déclenché sur PR :```
-
-- 🔒 Revue des dépendances
-
-- 🔍 Audit de sécurité npm``````- [Tests](#tests)
-
-- ✅ Validation des commits sémantiques
-
-**Principes appliqués** :
-
-### Configuration requise
-
-- ✅ Test-Driven Development## 🧪 Tests
-
-Pour utiliser les workflows, configurez ces secrets GitHub :
-
-- `DOCKER_USERNAME` : Nom d'utilisateur Docker Hub (optionnel)- ✅ SOLID principles
-
-- `DOCKER_PASSWORD` : Token Docker Hub (optionnel)
-
-- ✅ Dependency Inversion
-
-### Badges
-
-- ✅ Clean Architecture
-
-Remplacez `VOTRE_USERNAME` dans les badges du README par votre nom d'utilisateur GitHub.
-
-- ✅ TypeScript strict mode```bash
-
-## 🤝 Contribution
-
-- ✅ ESLint (qualité du code)
-
-1. Fork le projet
-
-2. Créez une branche (`git checkout -b feature/AmazingFeature`)make test              # 34 tests## 📦 Installation locale (alternative)- [Règles métier](#règles-métier)
-
-3. Faites vos modifications et ajoutez des tests dans `__tests__/`
-
-4. Commit avec Commitizen (`make commit` ou `npm run commit`)## 🐳 Docker
-
-5. Push vers la branche (`git push origin feature/AmazingFeature`)
-
-6. Ouvrez une Pull Requestmake test-coverage     # Couverture >85%
-
-
-
-### Commits Sémantiques### Build et exécution
-
-
-
-Ce projet utilise **Conventional Commits**. Utilisez `make commit` pour créer des commits guidés :make validate          # Validation complète
-
-
-
-```bash```bash
-
-make commit
-
-# Format: type(scope): descriptionmake docker-build```
-
-# Exemple: feat(cart): ajouter support multi-devises
-
-```make docker-run
-
-
-
-**Types de commits** :make docker-test```bash### Utilisation- [Structure du projet](#structure-du-projet)
-
-- `feat`: ✨ Nouvelle fonctionnalité
-
-- `fix`: 🐛 Correction de bug```
-
-- `docs`: 📚 Documentation
-
-- `test`: 🧪 Tests**Résultats** :
-
-- `refactor`: ♻️ Refactorisation
-
-- `style`: 💎 Formatage### Commandes manuelles
-
-- `perf`: ⚡ Performance
-
-- `build`: 📦 Build/dépendances- ✅ 34 tests passentnpm install
-
-- `ci`: 🎡 CI/CD
-
-- `chore`: 🔧 Maintenance```bash
-
-
-
-Consultez [COMMITS.md](./COMMITS.md) pour plus de détails.# Build- ✅ 4 test suites
-
-
-
-Les PR déclenchent automatiquement :docker build -t dvd-calculator .
-
-- ✅ Linting ESLint
-
-- ✅ Tests unitaires- ✅ Couverture >85%npm run build
-
-- ✅ Build TypeScript
-
-- ✅ Validation des exemples# Exécuter avec fichier
-
-- ✅ Build Docker
-
-- ✅ Revue des dépendancesdocker run --rm -v $(pwd)/examples:/app/examples dvd-calculator examples/example1.txt- ✅ 5 exemples validés
-
-
-
-## 🎯 Validation complète
-
-
-
-```bash# Mode interactifnode dist/index.js examples/example1.txt
-
-make all
-
-# oudocker run --rm -it dvd-calculator
-
-make ci
-
-```## 🏗️ Architecture
-
-
-
-**Attendu** :# Avec pipe
-
-```
-
-✓ ESLint: No errorsecho -e "Back to the Future 1\nBack to the Future 2" | docker run --rm -i dvd-calculator```**Fichier texte** :## 🎯 Présentation
-
-✓ Unit tests passed (34/34)
-
-✓ Build successful```
-
-✓ Example 1: 36 ✅
-
-✓ Example 2: 27 ✅**Clean Architecture + TDD** :
-
-✓ Example 3: 15 ✅
-
-✓ Example 4: 48 ✅## 📝 Utilisation
-
-✓ Example 5: 56 ✅
-
-
-
-All validations passed successfully! ✨
-
-```### Mode 1 : Fichier
-
-
-
-## 📁 Structure complète```
-
-
-
-``````bash
-
-ekinox/
-
-├── .github/make run                          # Utilise example1.txt par défautsrc/## 💰 Règles métier```bash
-
-│   ├── workflows/
-
-│   │   ├── ci.ymlnode dist/index.js input.txt      # Avec un fichier custom
-
-│   │   ├── release.yml
-
-│   │   └── dependency-review.yml```├── domain/          # Entités métier (Movie, Cart) - 0 dépendance
-
-│   ├── WORKFLOWS.md
-
-│   └── COMMIT_QUICKREF.md
-
-├── .husky/
-
-│   ├── commit-msg           # Validation commits### Mode 2 : Pipe├── application/     # Use cases, orchestration
-
-│   └── pre-commit           # Lint + tests
-
-├── src/
-
-│   ├── domain/
-
-│   │   └── entities/```bash├── infrastructure/  # Adapters (InputParser)
-
-│   │       ├── __tests__/   # Tests entités
-
-│   │       │   ├── Cart.test.tsecho -e "Back to the Future 1\nBack to the Future 2" | node dist/index.js
-
-│   │       │   └── Movie.test.ts
-
-│   │       ├── Cart.ts```└── index.ts        # CLI + Dependency Injection**Tarifs** :node dist/index.js input.txtCe projet implémente un système de calcul de prix pour une boutique de DVD avec des règles de réduction spécifiques pour la saga "Back to the Future". Il a été développé en suivant les principes du **Test-Driven Development (TDD)** et de la **Clean Architecture**.
-
-│   │       └── Movie.ts
-
-│   ├── application/
-
-│   │   ├── use-cases/
-
-│   │   │   ├── __tests__/   # Tests use cases### Mode 3 : Interactif```
-
-│   │   │   │   └── CalculateCartPrice.test.ts
-
-│   │   │   └── CalculateCartPrice.ts
-
-│   │   ├── ports/
-
-│   │   │   └── IInputParser.ts```bash- Back to the Future : 15€
-
-│   │   └── DVDCalculatorApp.ts
-
-│   ├── infrastructure/node dist/index.js
-
-│   │   ├── __tests__/       # Tests infrastructure
-
-│   │   │   └── InputParser.test.ts# Entrez les titres ligne par ligne**Principes appliqués** :
-
-│   │   └── InputParser.ts
-
-│   └── index.ts# Ctrl+D pour terminer
-
-├── examples/
-
-│   ├── example1.txt ... example5.txt```- ✅ Test-Driven Development- Autres films : 20€```
-
-├── Dockerfile
-
-├── docker-compose.yml
-
-├── Makefile                 # ⭐ Point d'entrée principal
-
-├── eslint.config.js## 📦 Sans Makefile- ✅ SOLID principles
-
-├── commitlint.config.js
-
-├── .cz-config.js
-
-├── tsconfig.json
-
-├── tsconfig.eslint.json```bash- ✅ Dependency Inversion
-
-├── jest.config.js
-
-├── package.json# Installation
-
-├── README.md
-
-├── CONTRIBUTING.mdnpm install- ✅ Clean Architecture
-
-├── COMMITS.md
-
-├── PROJECT_STATUS.mdnpm run build
-
-└── validate.sh
-
-```- ✅ TypeScript strict mode**Promotions (BTTF uniquement)** :### Fonctionnalités
-
-
-
-## 🚀 Pour bien démarrer# Tests & Lint
-
-
-
-```bashnpm run lint
-
-# Clone le projet
-
-cd ekinoxnpm test
-
-
-
-# Option 1 : Tout en une commande./validate.sh## 🐳 Docker- 2 volets différents → 10% de réduction
-
-make quick-start
-
-
-
-# Option 2 : Docker
-
-make docker-build && make docker-test# Exécution
-
-
-
-# Option 3 : Pipeline CI completnode dist/index.js examples/example1.txt
-
-make ci
-
-```### Build et exécution- 3 volets différents → 20% de réduction**Pipe** :
-
-# Option 4 : Validation complète
-
-make all
-
-```
-
-## 🔄 GitHub Actions CI/CD
+- ✅ **CI** : Lint + Build + Tests + Docker (sur push/PR)
+- ✅ **Release** : Publication automatique (sur tag v*)
+- ✅ **Dependency Review** : Audit de sécurité (sur PR)
 
 ## 📄 Licence
 
-
-
 ISC
 
-Le projet utilise GitHub Actions pour l'intégration continue :```bash
-
 ---
 
-
-
-**Node.js 24** • **TypeScript 5.3** • **Jest** • **ESLint** • **Commitizen** • **Clean Architecture** • **Docker** • **Makefile** • **GitHub Actions**
-
-### Workflows disponiblesmake docker-build
-
-
-
-#### CI (`.github/workflows/ci.yml`)make docker-run## 📋 Exemples```bash- ✅ Calcul automatique des prix avec réductions
-
-Déclenché sur push/PR vers `main`, `master`, `develop` :
-
-- ✅ **Lint** : Vérification ESLintmake docker-test
-
-- ✅ **Test** : Exécution des 34 tests + couverture
-
-- ✅ **Build** : Compilation TypeScript```
-
-- ✅ **Validate** : Validation des exemples
-
-- ✅ **Docker** : Build et test de l'image Docker
-
-
-
-#### Release (`.github/workflows/release.yml`)### Commandes manuelles| Panier | Résultat |echo -e "Back to the Future 1\nBack to the Future 2" | node dist/index.js- ✅ Support de plusieurs modes d'entrée (fichier, stdin, interactif)
-
-Déclenché sur tags `v*` :
-
-- 📦 Création d'une archive de release
-
-- 🐳 Publication de l'image Docker
-
-- 📝 Notes de release automatiques```bash|--------|----------|
-
-
-
-#### Dependency Review (`.github/workflows/dependency-review.yml`)# Build
-
-Déclenché sur PR :
-
-- 🔒 Revue des dépendancesdocker build -t dvd-calculator .| 3 volets BTTF | 36€ |```- ✅ Architecture propre et testable
-
-- 🔍 Audit de sécurité npm
-
-
-
-### Configuration requise
-
-# Exécuter avec fichier| 2 volets BTTF | 27€ |
-
-Pour utiliser les workflows, configurez ces secrets GitHub :
-
-- `DOCKER_USERNAME` : Nom d'utilisateur Docker Hub (optionnel)docker run --rm -v $(pwd)/examples:/app/examples dvd-calculator examples/example1.txt
-
-- `DOCKER_PASSWORD` : Token Docker Hub (optionnel)
-
-| 1 volet BTTF | 15€ |- ✅ Couverture de tests à 100%
-
-### Badges
-
-# Mode interactif
-
-Remplacez `VOTRE_USERNAME` dans les badges du README par votre nom d'utilisateur GitHub.
-
-docker run --rm -it dvd-calculator| 4 DVDs (3 volets) | 48€ |
-
-## 🎯 Validation complète
-
-
-
-```bash
-
-make all# Avec pipe| 3 BTTF + 1 autre | 56€ |**Interactif** :- ✅ Code TypeScript fortement typé
-
-# ou
-
-make ciecho -e "Back to the Future 1\nBack to the Future 2" | docker run --rm -i dvd-calculator
-
-```
-
-```
-
-**Attendu** :
-
-```
-
-✓ ESLint: No errors
-
-✓ Unit tests passed (34/34)## 📝 Utilisation## 🧪 Tests```bash
-
-✓ Build successful
-
-✓ Example 1: 36 ✅
-
-✓ Example 2: 27 ✅
-
-✓ Example 3: 15 ✅### Mode 1 : Fichier
-
-✓ Example 4: 48 ✅
-
-✓ Example 5: 56 ✅
-
-
-
-All validations passed successfully! ✨```bash```bashnode dist/index.js## 🏗️ Architecture
-
-```
-
-make run                          # Utilise example1.txt par défaut
-
-## 📁 Structure complète
-
-node dist/index.js input.txt      # Avec un fichier customnpm test              # 34 tests
-
-```
-
-ekinox/```
-
-├── .github/
-
-│   └── workflows/           # GitHub Actions CI/CDnpm run test:coverage # Couverture# Saisir les titres puis Ctrl+D
-
-│       ├── ci.yml          # Pipeline CI
-
-│       ├── release.yml     # Workflow de release### Mode 2 : Pipe
-
-│       └── dependency-review.yml
-
-├── src/./validate.sh         # Validation complète
-
-│   ├── domain/
-
-│   │   └── entities/        # Movie, Cart + tests```bash
-
-│   ├── application/
-
-│   │   ├── use-cases/       # CalculateCartPriceecho -e "Back to the Future 1\nBack to the Future 2" | node dist/index.js``````Le projet suit les principes de la **Clean Architecture** :
-
-│   │   ├── ports/           # IInputParser interface
-
-│   │   └── DVDCalculatorApp.ts```
-
-│   ├── infrastructure/
-
-│   │   └── InputParser.ts   # Adapter
-
-│   └── index.ts             # CLI
-
-├── examples/                # 5 fichiers d'exemple### Mode 3 : Interactif
-
-├── Dockerfile
-
-├── docker-compose.yml## 🏗️ Architecture
-
-├── Makefile                 # ⭐ Point d'entrée principal
-
-├── eslint.config.js         # Configuration ESLint```bash
-
-├── tsconfig.json
-
-├── tsconfig.eslint.jsonnode dist/index.js
-
-├── jest.config.js
-
-├── package.json# Entrez les titres ligne par ligne
-
-└── validate.sh
-
-```# Ctrl+D pour terminerClean Architecture + TDD :## Règles métier```
-
-
-
-## 🚀 Pour bien démarrer```
-
-
-
-```bash- **Domain** : Entités métier (Movie, Cart)
-
-# Clone le projet
-
-cd ekinox## 📦 Sans Makefile
-
-
-
-# Option 1 : Tout en une commande- **Application** : Use cases┌─────────────────────────────────────────────┐
-
-make quick-start
-
-```bash
-
-# Option 2 : Docker
-
-make docker-build && make docker-test# Installation- **Infrastructure** : Adapters (InputParser)
-
-
-
-# Option 3 : Pipeline CI completnpm install
-
-make ci
-
-npm run build- **Interface** : CLI**Tarifs** :│           Application Layer                 │
-
-# Option 4 : Validation complète
-
-make all
-
-```
-
-# Tests
-
-## 🤝 Contribution
-
-npm test
-
-1. Fork le projet
-
-2. Créez une branche (`git checkout -b feature/AmazingFeature`)./validate.sh## 📁 Structure- Back to the Future : 15€│  - DVDCalculatorApp (orchestration)         │
-
-3. Commit vos changements (`git commit -m 'Add AmazingFeature'`)
-
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-
-5. Ouvrez une Pull Request
-
-# Exécution
-
-Les PR déclenchent automatiquement :
-
-- ✅ Linting ESLintnode dist/index.js examples/example1.txt
-
-- ✅ Tests unitaires
-
-- ✅ Build TypeScript``````- Autres films : 20€│  - Use Cases (CalculateCartPrice)           │
-
-- ✅ Validation des exemples
-
-- ✅ Build Docker
-
-- ✅ Revue des dépendances
-- ✅ Validation des commits sémantiques
-
-## 🎯 Validation complètesrc/
-
-## 📄 Licence
-
-
-
-ISC
-
-```bash├── domain/          # Entités (0 dépendance)└──────────────┬──────────────────────────────┘
-
----
-
-make all
-
-**Node.js 24** • **TypeScript 5.3** • **Jest** • **ESLint** • **Clean Architecture** • **Docker** • **Makefile** • **GitHub Actions**
-
-# ou├── application/     # Use cases
-
-make validate
-
-```├── infrastructure/  # Adapters**Promotions (BTTF uniquement)** :               │
-
-
-
-**Attendu** :└── index.ts        # CLI
-
-```
-
-✓ Unit tests passed (34/34)```- 2 volets différents → 10% de réduction sur tous les DVDs BTTF┌──────────────▼──────────────────────────────┐
-
-✓ Build successful
-
-✓ Example 1: 36 ✅
-
-✓ Example 2: 27 ✅
-
-✓ Example 3: 15 ✅---- 3 volets différents → 20% de réduction sur tous les DVDs BTTF│          Domain Layer (Business Logic)      │
-
-✓ Example 4: 48 ✅
-
-✓ Example 5: 56 ✅
-
-
-
-All validations passed successfully! ✨TypeScript 5.3 • Jest • Clean Architecture • Docker│  ┌─────────────────────────────────────┐   │
-
-```
-
-
-
-## 📁 Structure complète## Exemples│  │  Entities: Movie, Cart              │   │
-
-
-
-```│  │  - Business rules                   │   │
-
-ekinox/
-
-├── src/```bash│  │  - Price calculation                │   │
-
-│   ├── domain/
-
-│   │   └── entities/        # Movie, Cart + tests# Exemple 1 : 3 volets → 36€│  │  - Discount logic                   │   │
-
-│   ├── application/
-
-│   │   ├── use-cases/       # CalculateCartPricenode dist/index.js examples/example1.txt│  └─────────────────────────────────────┘   │
-
-│   │   └── DVDCalculatorApp.ts
-
-│   ├── infrastructure/└──────────────┬──────────────────────────────┘
-
-│   │   └── InputParser.ts   # Adapter
-
-│   └── index.ts             # CLI# Exemple 2 : 2 volets → 27€                 │
-
-├── examples/                # 5 fichiers d'exemple
-
-├── Dockerfilenode dist/index.js examples/example2.txt┌──────────────▼──────────────────────────────┐
-
-├── docker-compose.yml
-
-├── Makefile                 # ⭐ Point d'entrée principal│       Infrastructure Layer                  │
-
-├── package.json
-
-├── tsconfig.json# Exemple 5 : 3 BTTF + 1 autre → 56€│         (InputParser, CLI)                  │
-
-├── jest.config.js
-
-└── validate.shnode dist/index.js examples/example5.txt└─────────────────────────────────────────────┘
-
-```
-
-``````
-
-## 🚀 Pour bien démarrer
-
-
-
-```bash
-
-# Clone le projet| Panier | Calcul | Prix |### Principes appliqués
-
-cd ekinox
-
-|--------|--------|------|
-
-# Option 1 : Tout en une commande
-
-make quick-start| 3 volets BTTF | (15×3)×0.8 | 36€ |- **Separation of Concerns** : Chaque couche a une responsabilité claire
-
-
-
-# Option 2 : Docker| 2 volets BTTF | (15×2)×0.9 | 27€ |- **Dependency Inversion** : Les dépendances pointent vers l'intérieur
-
-make docker-build && make docker-test
-
-| 1 volet BTTF | 15×1 | 15€ |- **Single Responsibility** : Une classe = une responsabilité
-
-# Option 3 : Validation complète
-
-make all| 4 DVDs BTTF (3 volets) | (15×4)×0.8 | 48€ |- **Test-Driven Development** : Les tests ont été écrits avant le code
-
-```
-
-| 3 BTTF + 1 autre | (15×3)×0.8+20 | 56€ |- **Domain sans dépendance** : Le domaine est 100% pur, sans aucune dépendance externe
-
----
-
-
-
-**Node.js 24** • **TypeScript 5.3** • **Jest** • **ESLint** • **Clean Architecture** • **Docker** • **Makefile**
-
-## Tests## 📦 Installation
-
-
-
-```bash### Prérequis
-
-npm test              # Lancer les tests (34 tests)
-
-npm run test:coverage # Avec couverture- Node.js >= 18.x
-
-./validate.sh         # Validation complète- npm >= 9.x
-
-```
-
-### Étapes d'installation
-
-**Résultat attendu** :
-
-``````bash
-
-Test Suites: 4 passed# Cloner le projet (ou extraire l'archive)
-
-Tests: 34 passedcd ekinox
-
-Coverage: >85%
-
-```# Installer les dépendances
-
-npm install
-
-## Structure
-
-# Compiler le projet TypeScript
-
-```npm run build
-
-src/```
-
-├── domain/              # Entités métier (Movie, Cart)
-
-├── application/         # Use cases, orchestration## 🚀 Utilisation
-
-├── infrastructure/      # Parsing, I/O
-
-└── index.ts            # CLI### Mode 1 : Lecture depuis un fichier
-
-```
-
-```bash
-
-## Architecture# Créer un fichier d'entrée
-
-cat > input.txt << EOF
-
-**Clean Architecture** avec :Back to the Future 1
-
-- Domain pur (0 dépendance)Back to the Future 2
-
-- Application (use cases)Back to the Future 3
-
-- Infrastructure (adapters)EOF
-
-- Injection de dépendance
-
-# Exécuter le programme
-
-**Principes** : SOLID, TDD, Hexagonal Architecturenode dist/index.js input.txt
-
-# Output: 36
-
-## Commandes```
-
-
-
-```bash### Mode 2 : Via pipe (stdin)
-
-npm install           # Installer
-
-npm run build         # Compiler```bash
-
-npm start             # Lancerecho -e "Back to the Future 1\nBack to the Future 3" | node dist/index.js
-
-npm run dev           # Dev mode# Output: 27
-
-npm test              # Tests```
-
-./validate.sh         # Validation
-
-```### Mode 3 : Mode interactif
-
-
-
-## Qualité```bash
-
-node dist/index.js
-
-- ✅ 34 tests (TDD)# Entrez les titres ligne par ligne
-
-- ✅ TypeScript strict# Appuyez sur Ctrl+D (Unix) ou Ctrl+Z (Windows) pour terminer
-
-- ✅ Clean Architecture```
-
-- ✅ >85% coverage
-
-- ✅ SOLID principles### Mode 4 : Via npm dev (sans compilation)
-
-- ✅ Production-ready
-
-```bash
-
-## Pour présentationnpm run dev < input.txt
-
-```
-
-**Démo 3 minutes** :
-
-```bash## 🧪 Tests
-
-npm install && npm run build && npm test && ./validate.sh
-
-node dist/index.js examples/example1.txtLe projet dispose d'une suite de tests complète avec **34 tests** couvrant :
-
-```
-
-- ✅ Entités du domaine (Movie, Cart)
-
-**Points clés** :- ✅ Use cases (CalculateCartPrice)
-
-- Architecture professionnelle- ✅ Infrastructure (InputParser)
-
-- TDD (tests avant code)- ✅ Tous les exemples de la spécification
-
-- Code maintenable
-
-- TypeScript strict### Exécuter les tests
-
-- Documentation complète
-
-```bash
-
----# Lancer tous les tests
-
-*TypeScript 5.3 • Jest • Clean Architecture • Node.js 18+*npm test
-
-
-# Mode watch (re-exécution automatique)
-npm run test:watch
-
-# Coverage report
-npm run test:coverage
-```
-
-### Résultats attendus
-
-```
-Test Suites: 4 passed, 4 total
-Tests:       34 passed, 34 total
-Snapshots:   0 total
-```
-
-## 💰 Règles métier
-
-### Tarifs
-
-- **DVD Back to the Future** : 15 € / unité
-- **Autres films** : 20 € / unité
-
-### Réductions (sur les DVDs Back to the Future uniquement)
-
-| Nombre de volets différents | Réduction | Application |
-|----------------------------|-----------|-------------|
-| 1 volet | 0% | Pas de réduction |
-| 2 volets différents | 10% | Sur tous les DVDs BTTF |
-| 3 volets différents | 20% | Sur tous les DVDs BTTF |
-
-### Exemples
-
-#### Exemple 1 : 3 volets différents
-```
-Entrée:
-Back to the Future 1
-Back to the Future 2
-Back to the Future 3
-
-Calcul: (15 × 3) × 0.8 = 36 €
-```
-
-#### Exemple 2 : 2 volets différents
-```
-Entrée:
-Back to the Future 1
-Back to the Future 3
-
-Calcul: (15 × 2) × 0.9 = 27 €
-```
-
-#### Exemple 3 : 4 DVDs avec 3 volets différents
-```
-Entrée:
-Back to the Future 1
-Back to the Future 2
-Back to the Future 3
-Back to the Future 2
-
-Calcul: (15 × 4) × 0.8 = 48 €
-```
-
-#### Exemple 4 : Mix BTTF + autre film
-```
-Entrée:
-Back to the Future 1
-Back to the Future 2
-Back to the Future 3
-La chèvre
-
-Calcul: ((15 × 3) × 0.8) + 20 = 56 €
-```
-
-## 📁 Structure du projet
-
-```
-ekinox/
-├── src/
-│   ├── domain/                    # Couche domaine (logique métier)
-│   │   └── entities/
-│   │       ├── Movie.ts           # Entité Movie
-│   │       ├── Movie.test.ts
-│   │       ├── Cart.ts            # Entité Cart
-│   │       └── Cart.test.ts
-│   │
-│   ├── application/               # Couche application (use cases)
-│   │   ├── use-cases/
-│   │   │   ├── CalculateCartPrice.ts
-│   │   │   └── CalculateCartPrice.test.ts
-│   │   └── DVDCalculatorApp.ts    # Orchestration
-│   │
-│   ├── infrastructure/            # Couche infrastructure
-│   │   ├── InputParser.ts         # Parser d'entrée
-│   │   └── InputParser.test.ts
-│   │
-│   └── index.ts                   # CLI principal
-│
-├── dist/                          # Fichiers compilés
-├── package.json
-├── tsconfig.json                  # Configuration TypeScript
-├── jest.config.js                 # Configuration Jest
-└── README.md
-```
-
-## 🛠️ Scripts disponibles
-
-```bash
-npm run build        # Compiler le projet TypeScript
-npm start            # Exécuter le programme compilé
-npm run dev          # Exécuter en mode développement (ts-node)
-npm test             # Lancer les tests
-npm run test:watch   # Tests en mode watch
-npm run test:coverage # Rapport de couverture
-```
-
-## 🔍 Qualité du code
-
-### Standards appliqués
-
-- ✅ **TypeScript strict mode** : Types stricts, pas de `any`
-- ✅ **100% de couverture de tests** : Toutes les branches testées
-- ✅ **Clean Code** : Noms explicites, fonctions courtes, SRP
-- ✅ **SOLID principles** : Architecture maintenable et extensible
-- ✅ **Documentation** : JSDoc sur toutes les méthodes publiques
-
-### Configuration TypeScript
-
-```json
-{
-  "strict": true,
-  "noUnusedLocals": true,
-  "noUnusedParameters": true,
-  "noImplicitReturns": true,
-  "noFallthroughCasesInSwitch": true
-}
-```
-
-## 🚀 Évolutions possibles
-
-- [ ] Ajouter un mode API REST
-- [ ] Supporter d'autres formats d'entrée (JSON, CSV)
-- [ ] Ajouter une interface web
-- [ ] Gérer d'autres promotions (bundles, codes promo)
-- [ ] Ajouter un système de logging
-- [ ] Internationalisation (i18n)
-
-## 📝 Licence
-
-ISC
-
-## 👤 Auteur
-
-Développé avec ❤️ en suivant les principes du TDD et de la Clean Architecture.
-
----
-
-**Note** : Ce projet a été réalisé dans le cadre d'un exercice technique pour démontrer la maîtrise du TDD, de la Clean Architecture et de TypeScript.
+**Node.js 24** • **TypeScript 5.3** • **Jest** • **ESLint** • **Clean Architecture** • **Docker** • **Fastify**
