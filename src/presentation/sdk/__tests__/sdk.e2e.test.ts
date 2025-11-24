@@ -51,7 +51,7 @@ describe('SDK E2E Tests', () => {
 
       const total = calculator.calculate(movies);
 
-      expect(total).toBe(40); // 2 BTTF with episodes 2 and 3 = 2 different episodes (no trilogy) = 20 each
+      expect(total).toBe(27); // 2 BTTF with episodes 2 and 3 = 2 different episodes with 10% discount = (15×2)×0.9
     });
 
     it('should be case insensitive', () => {
