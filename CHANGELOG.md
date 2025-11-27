@@ -174,7 +174,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - QUICKSTART.md - 30-second quick start
 
-  - EXCEPTIONS.md - Exception handling guide  - ✅ **Créé** : `src/application/ports/IInputParser.ts` (interface)
+  - EXCEPTIONS.md - Exception handling guide
+  - ✅ **Créé** : `src/core/application/ports/IInputParser.ts` (interface)
 
   - README.md - Main documentation
 
@@ -230,7 +231,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Code Quality**: ESLint + Prettier + Husky
 
-- **Tests**: 102 tests total (all passing)  - EXCEPTIONS.md - Exception handling guide```
+- **Tests**: 229 tests total (all passing)  - EXCEPTIONS.md - Exception handling guide```
 
 - **Coverage**: 92.12% statements, 76.19% branches
 
@@ -310,7 +311,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Code Quality**: ESLint + Prettier + Husky### 🔧 Refactoring : Déplacement des Use Cases vers la couche Application
 
-- **Tests**: 102 tests total (all passing)
+- **Tests**: 229 tests total (all passing)
 
 - **Coverage**: 92.12% statements, 76.19% branches**Motivation** : Conformité avec la Clean Architecture classique de Robert C. Martin
 
@@ -320,9 +321,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-### Added- ✅ **Déplacé** : `src/domain/use-cases/` → `src/application/use-cases/`
+### Added
+- ✅ **Déplacé** : `src/domain/use-cases/` → `src/core/application/use-cases/`
 
-- Basic calculator logic- ✅ **Mis à jour** : Tous les imports dans les fichiers concernés
+- Basic calculator logic
+- ✅ **Mis à jour** : Tous les imports dans les fichiers concernés
 
 - Domain entities (Movie, Cart)- ✅ **Corrigé** : Documentation (README, ARCHITECTURE, PROJECT_SUMMARY, TESTS, QUICKSTART)
 
@@ -426,7 +429,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Statistiques
 
 - **Lignes de code** : ~500 lignes (src)
-- **Tests** : 34 tests
+- **Tests** : 229 tests
 - **Couverture** : >85% globale, 100% sur le domaine
 - **Documentation** : 6 fichiers (README, ARCHITECTURE, TESTS, EXAMPLES, QUICKSTART, PROJECT_SUMMARY)
 

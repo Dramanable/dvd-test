@@ -209,7 +209,7 @@ npm test src/api
 npm run test:coverage
 ```
 
-**76 tests** dont **16 tests API** couvrant :
+**229 tests** dont **16 tests API** couvrant :
 - ✅ Calculs avec remises
 - ✅ Validation des entrées
 - ✅ Gestion des erreurs

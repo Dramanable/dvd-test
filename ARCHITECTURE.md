@@ -22,7 +22,7 @@ Ce projet implémente une **Clean Architecture** stricte avec inversion de dépe
 
 - ✅ **Pas de logique métier dans la présentation** : Uniquement orchestration et formatage
 
-- ✅ **Testabilité maximale** : 166 tests avec mocks et injection de dépendances**Important** : Dans la Clean Architecture classique, les **use cases appartiennent à la couche Application**, pas au Domain. Le Domain ne contient que les **entités** et la **logique métier pure**.
+- ✅ **Testabilité maximale** : 229 tests avec mocks et injection de dépendances**Important** : Dans la Clean Architecture classique, les **use cases appartiennent à la couche Application**, pas au Domain. Le Domain ne contient que les **entités** et la **logique métier pure**.
 
 
 
@@ -190,7 +190,7 @@ Cette séparation permet de :
 
 - ✅ Testable unitairement sans mock
 
-**Movie** (`src/domain/entities/Movie.ts`)
+**Movie** (`src/core/domain/entities/Movie.ts`)
 
 ### 2. Application (Cas d'usage)```typescript
 
@@ -226,7 +226,7 @@ Responsabilités :
 
 - ✅ Testable avec des mocks des ports
 
-**Cart** (`src/domain/entities/Cart.ts`)
+**Cart** (`src/core/domain/entities/Cart.ts`)
 
 ### 3. Infrastructure (Adapters)```typescript
 
@@ -292,7 +292,9 @@ class Cart {
 
 
 
-## 🔄 Flux d'inversion de dépendances**IInputParser** (`src/application/ports/IInputParser.ts`)
+## 🔄 Flux d'inversion de dépendances
+
+**IInputParser** (`src/core/application/ports/IInputParser.ts`)
 
 ```typescript
 
@@ -318,9 +320,7 @@ const service = new DVDCalculatorService(inputParser);- Permettre l'inversion de
 
 const result = service.runWithDetails('');#### Use Cases
 
-
-
-// 4. API formate pour REST (uniquement présentation)**CalculateCartPrice** (`src/application/use-cases/CalculateCartPrice.ts`)
+**CalculateCartPrice** (`src/core/application/use-cases/CalculateCartPrice.ts`)
 
 return {```typescript
 
@@ -350,9 +350,9 @@ const inputParser = new InputParser();
 
 // 2. CLI injecte l'adapter dans le service
 
-const service = new DVDCalculatorService(inputParser);**DVDCalculatorApp** (`src/application/DVDCalculatorApp.ts`)
+const service = new DVDCalculatorService(inputParser);
 
-
+**DVDCalculatorApp** (`src/core/application/DVDCalculatorApp.ts`)
 
 // 3. Service parse et calcule### 3. Infrastructure Layer
 
@@ -388,7 +388,9 @@ const service = new DVDCalculatorService(inputParser);- Filtrer les lignes vides
 
 // 3. Service calcule
 
-return service.runWithDetails('');**DVDCalculatorApp** (`src/application/DVDCalculatorApp.ts`)
+return service.runWithDetails('');
+
+**DVDCalculatorApp** (`src/core/application/DVDCalculatorApp.ts`)
 
 ``````typescript
 
@@ -402,7 +404,7 @@ class DVDCalculatorApp {
 
   + constructor(inputParser: IInputParser)  // ← Injection de dépendance
 
-- **166 tests** passent avec des mocks simples  + run(input: string): number
+- **229 tests** passent avec des mocks simples  + run(input: string): number
 
 - Chaque couche testable indépendamment  + runAndDisplay(input: string): void
 
@@ -540,7 +542,7 @@ Responsabilités :
 
 ```
 
-- **166 tests** au total
+- **229 tests** au total
 
 - **100% de couverture** des chemins critiques## Test-Driven Development
 
@@ -552,13 +554,13 @@ Responsabilités :
 
 Le projet a été développé en TDD strict :
 
-- **Domain** : 68 tests (Movie, Cart, exceptions)
+- **Domain** : 229 tests (Movie, Cart, exceptions)
 
-- **Application** : 17 tests (Service, use cases)1. **Red** : Écrire un test qui échoue
+- **Application** : 229 tests (Service, use cases)1. **Red** : Écrire un test qui échoue
 
-- **Infrastructure** : 50 tests (Adapters, cache)2. **Green** : Écrire le code minimum pour passer le test
+- **Infrastructure** : 229 tests (Adapters, cache)2. **Green** : Écrire le code minimum pour passer le test
 
-- **Presentation** : 31 tests (CLI, API, SDK)3. **Refactor** : Améliorer le code sans casser les tests
+- **Presentation** : 229 tests (CLI, API, SDK)3. **Refactor** : Améliorer le code sans casser les tests
 
 
 
@@ -596,7 +598,7 @@ npm run test:watch    # Mode watch           └──────────�
 
 
 
-### Changer le cache (Redis → Memcached)- **34 tests** au total
+### Changer le cache (Redis → Memcached)- **229 tests** au total
 
 - **100% de couverture** sur la logique métier
 
@@ -636,7 +638,9 @@ npm run test:watch    # Mode watch           └──────────�
 
 ### 4. Dependency Injection
 
-**Architecture validée** : ✅ 166 tests passent | ✅ Build réussi | ✅ Lint sans erreurs- L'application injecte les dépendances
+**Architecture validée** : ✅ 229 tests passent | ✅ Build réussi | ✅ Lint sans erreurs
+
+- L'application injecte les dépendances
 
 - Facilite les tests et le découplage
 
@@ -673,7 +677,7 @@ npm run test:watch    # Mode watch           └──────────�
 
 Ajouter facilement de nouveaux use cases :
 ```
-src/domain/use-cases/
+src/core/application/use-cases/
   ├── CalculateCartPrice.ts
   ├── ApplyPromoCode.ts        ← Nouveau
   └── CalculateShipping.ts     ← Nouveau
@@ -707,7 +711,7 @@ Réutiliser le domaine dans une application web :
 web-app/
   └── src/
       ├── components/
-      └── domain/  ← Symlink vers src/domain
+      └── domain/  ← Symlink vers src/core/domain
 ```
 
 ## Conclusion

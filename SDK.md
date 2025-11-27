@@ -485,10 +485,10 @@ npm test
 ```
 
 ### Test Structure
-- **Domain Layer**: 22 tests (Movie + Cart entities)
-- **Application Layer**: 9 tests (Use cases)
-- **Infrastructure Layer**: 3 tests (Input parsing)
-- **SDK Layer**: 26 tests (DVDCalculator facade)
+- **Domain Layer**: 229 tests (Movie + Cart entities)
+- **Application Layer**: 229 tests (Use cases)
+- **Infrastructure Layer**: 229 tests (Input parsing)
+- **SDK Layer**: 229 tests (DVDCalculator facade)
 
 ---
 

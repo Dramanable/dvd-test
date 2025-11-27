@@ -1,10 +1,14 @@
 # DVD Calculator - Clean Architecture
 
+<!-- Badges dynamiques générés par ./scripts/generate-badges.sh -->
 ![CI](https://github.com/Dramanable/dvd-test/workflows/CI/badge.svg)
-![Tests](https://img.shields.io/badge/tests-259%20passing-brightgreen)
-![Coverage](https://img.shields.io/badge/coverage-83.72%25-brightgreen)
+![Tests](https://img.shields.io/badge/tests-229%20passing-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-74.12%25-brightgreen)
 ![Node](https://img.shields.io/badge/node-24.x-brightgreen)
 ![TypeScript](https://img.shields.io/badge/typescript-5.3-blue)
+![License](https://img.shields.io/badge/license-ISC-blue)
+![License](https://img.shields.io/badge/license-ISC-blue)
+![License](https://img.shields.io/badge/license-ISC-blue)
 ![License](https://img.shields.io/badge/license-ISC-blue)
 
 Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to the Future".
@@ -16,6 +20,7 @@ Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to th
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Architecture Clean détaillée avec diagrammes
 - **[API.md](./API.md)** - Documentation de l'API REST avec cache Redis
 - **[SDK.md](./SDK.md)** - Guide d'utilisation du SDK
+- **[docs/DYNAMIC_STATS.md](./docs/DYNAMIC_STATS.md)** - Système de statistiques dynamiques
 - **[DOCKER.md](./DOCKER.md)** - Déploiement avec Docker et Docker Compose
 - **[CHANGELOG.md](./CHANGELOG.md)** - Historique des versions
 
@@ -73,7 +78,7 @@ Domain (Movie, Cart - 0 dépendance)
 - ✅ **Dependency Inversion Principle** - Les dépendances pointent vers les abstractions
 - ✅ **Zero business logic in presentation** - Uniquement orchestration
 - ✅ **Single Responsibility Principle** - Une classe = une responsabilité
-- ✅ **Test-Driven Development** - 259 tests avec couverture >83%
+- ✅ **Test-Driven Development** - 229 tests avec couverture >74%
 
 **Voir [ARCHITECTURE.md](./ARCHITECTURE.md) pour les détails complets.**
 
@@ -121,7 +126,7 @@ const total = calculator.getTotal(); // 27€
 
 ## 🧪 Tests
 
-**259 tests** avec couverture >83% :
+**229 tests** avec couverture >74% :
 
 ```bash
 npm test              # Tous les tests
@@ -130,15 +135,32 @@ npm run test:watch    # Mode watch
 ./validate.sh         # Validation complète
 ```
 
+### 📊 Statistiques Dynamiques
+
+Les badges et statistiques de ce README sont **automatiquement mis à jour** :
+
+```bash
+# Générer les badges avec les vraies statistiques
+./scripts/generate-badges.sh
+
+# Mettre à jour toute la documentation
+./scripts/update-docs-stats.sh  
+
+# Intégration continue complète (tests + stats + commit)
+./scripts/ci-update-stats.sh
+```
+
+> **Note** : Les statistiques sont extraites en temps réel depuis `npm test` et `npm run test:coverage`.
+
 **Distribution** :
-- Domain : 68 tests (Movie, Cart)
-- Application : 27 tests (Services, Use Cases)
-- Infrastructure : 50 tests (Adapters)
-- Presentation : 114 tests (CLI, API, SDK, E2E)
+- Domain : 229 tests (Movie, Cart)
+- Application : 229 tests (Services, Use Cases)
+- Infrastructure : 229 tests (Adapters)
+- Presentation : 229 tests (CLI, API, SDK, E2E)
 
 **E2E Tests** :
-- API E2E : 16 tests (endpoints, CORS, performance)
-- SDK E2E : 35 tests (calculate, fluent API, scénarios réels)
+- API E2E : 229 tests (endpoints, CORS, performance)
+- SDK E2E : 229 tests (calculate, fluent API, scénarios réels)
 
 ## 🐳 Docker
 
@@ -171,8 +193,8 @@ docker run --rm -p 3000:3000 dvd-calculator-api
 - ✅ **Domain pur** - 0 dépendance externe
 
 ### Qualité
-- ✅ **259 tests** - TDD from start
-- ✅ **83.72% coverage** - Tous les chemins testés
+- ✅ **229 tests** - TDD from start  
+- ✅ **74.12% coverage** - Tous les chemins testés
 - ✅ **TypeScript strict** - Pas de \`any\`
 - ✅ **ESLint** - Code style cohérent
 
@@ -185,12 +207,13 @@ docker run --rm -p 3000:3000 dvd-calculator-api
 
 ```
 src/
-├── domain/              # Entités métier (0 dépendance)
-│   └── entities/        # Movie, Cart
-├── application/         # Use Cases + Ports
-│   ├── services/        # DVDCalculatorService
-│   ├── use-cases/       # CalculateCartPrice
-│   └── ports/           # IInputParser, ICache
+├── core/                # Couche métier centrale
+│   ├── domain/          # Entités métier (0 dépendance)
+│   │   └── entities/    # Movie, Cart
+│   └── application/     # Use Cases + Ports
+│       ├── services/    # DVDCalculatorService
+│       ├── use-cases/   # CalculateCartPrice
+│       └── ports/       # IInputParser, ICache
 ├── infrastructure/      # Adapters
 │   └── adapters/        # InputParser, ArrayInputParser, Cache
 └── presentation/        # Interfaces utilisateur
