@@ -23,7 +23,7 @@ const cliModule = require('./presentation/cli/index');
 
 // If the CLI exports CLIHandler, instantiate and run it
 if (cliModule.CLIHandler) {
-  const { DVDCalculatorService } = require('./application/services/DVDCalculatorService');
+  const { DVDCalculatorService } = require('./core/application/services/DVDCalculatorService');
   const { InputParser } = require('./infrastructure/adapters/InputParser');
   
   const inputParser = new InputParser();
