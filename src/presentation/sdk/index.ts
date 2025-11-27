@@ -45,15 +45,15 @@ export { Cart } from '@domain/entities/Cart';
 export { Movie, MovieType } from '@domain/entities/Movie';
 
 // Use cases (for advanced usage)
-export { CalculateCartPrice } from '@application/use-cases/CalculateCartPrice';
+export { CalculateCartPrice } from 'core/application/use-cases/CalculateCartPrice';
 
 // Application layer (for DI and custom implementations)
-export type { CacheStats, ICache } from '@application/ports/ICache';
-export type { IInputParser } from '@application/ports/IInputParser';
+export type { CacheStats, ICache } from 'core/application/ports/ICache';
+export type { IInputParser } from 'core/application/ports/IInputParser';
 export {
   DVDCalculatorService as DVDCalculatorApp,
   DVDCalculatorService,
-} from '@application/services/DVDCalculatorService';
+} from 'core/application/services/DVDCalculatorService';
 
 // Infrastructure (concrete implementations)
 export { InMemoryCache } from '@infrastructure/adapters/InMemoryCache';

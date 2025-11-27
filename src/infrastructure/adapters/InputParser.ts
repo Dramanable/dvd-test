@@ -1,4 +1,4 @@
-import { IInputParser } from '@application/ports/IInputParser';
+import { IInputParser } from 'core/application/ports/IInputParser';
 
 /**
  * Parser for converting text input into an array of movie titles

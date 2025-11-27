@@ -1,5 +1,5 @@
 import 'fastify';
-import { ICache } from '../application/ports/ICache';
+import { ICache } from '../../../core/application/ports/ICache';
 
 declare module 'fastify' {
   interface FastifyInstance {

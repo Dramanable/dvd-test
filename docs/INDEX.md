@@ -23,7 +23,6 @@ This directory contains detailed technical documentation for the DVD Shop Calcul
 
 ### Getting Started
 - **[README.md](../README.md)** - Main project documentation and quick start guide
-- **[QUICKSTART.md](../QUICKSTART.md)** - Quick start guide for developers
 
 ### Architecture & Design
 - **[ARCHITECTURE.md](../ARCHITECTURE.md)** - Clean Architecture implementation details
@@ -52,17 +51,7 @@ This directory contains detailed technical documentation for the DVD Shop Calcul
   - Docker Compose configuration
   - Production deployment
 
-- **[CONFIGURATION.md](../CONFIGURATION.md)** - Configuration guide
-  - Environment variables
-  - TypeScript configuration
-  - Jest configuration
-  - ESLint & Prettier setup
 
-- **[EXCEPTIONS.md](../EXCEPTIONS.md)** - Exception handling documentation
-  - Domain exceptions
-  - Validation exceptions
-  - Error codes
-  - Best practices
 
 - **[CONTRIBUTING.md](../CONTRIBUTING.md)** - Contribution guidelines
   - Development setup
@@ -80,7 +69,7 @@ This directory contains detailed technical documentation for the DVD Shop Calcul
 
 ### For New Developers
 1. Start with [README.md](../README.md)
-2. Follow [QUICKSTART.md](../QUICKSTART.md)
+2. Follow the quick start section in [README.md](../README.md)
 3. Read [ARCHITECTURE.md](../ARCHITECTURE.md) to understand the structure
 4. Check [CONTRIBUTING.md](../CONTRIBUTING.md) before making changes
 
@@ -95,10 +84,9 @@ This directory contains detailed technical documentation for the DVD Shop Calcul
 3. [REDIS_CACHE.md](./REDIS_CACHE.md) for caching configuration
 
 ### For Maintainers
-1. [ARCHITECTURE.md](../ARCHITECTURE.md) for design decisions
+1. [ARCHITECTURE.md](../ARCHITECTURE.md) for design decisions and error handling
 2. [TESTS_SUMMARY.md](./TESTS_SUMMARY.md) for test coverage
-3. [EXCEPTIONS.md](../EXCEPTIONS.md) for error handling
-4. [CHANGELOG.md](../CHANGELOG.md) for version history
+3. [CHANGELOG.md](../CHANGELOG.md) for version history
 
 ## 🔍 Quick Links
 
