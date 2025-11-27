@@ -1,8 +1,8 @@
+import { DVDCalculatorService } from '@application/services/DVDCalculatorService';
 import { Cart } from '@domain/entities/Cart';
 import { Movie, MovieType } from '@domain/entities/Movie';
 import { ValidationException } from '@domain/exceptions';
 import { ArrayInputParser } from '@infrastructure/adapters/ArrayInputParser';
-import { DVDCalculatorService } from '@application/services/DVDCalculatorService';
 
 /**
  * Result of a detailed price calculation
