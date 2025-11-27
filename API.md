@@ -249,6 +249,42 @@ Les remises sont calculées automatiquement :
 | 2 épisodes       | 10%    |
 | 3 épisodes       | 20%    |
 
+## 🚀 Cache Redis (Optionnel)
+
+L'API inclut un système de cache Redis pour améliorer les performances.
+
+### Configuration avec Docker Compose
+
+```bash
+# Démarrer API + Redis
+docker-compose up
+
+# Redis seul
+docker-compose up redis
+```
+
+### Variables d'environnement Redis
+
+```bash
+REDIS_HOST=localhost    # Host Redis (défaut: localhost)
+REDIS_PORT=6379        # Port Redis (défaut: 6379)
+REDIS_PASSWORD=        # Mot de passe (optionnel)
+```
+
+### Métriques de cache
+
+Consultez `/metrics` pour les statistiques de cache :
+
+```json
+{
+  "cache": {
+    "hits": 150,
+    "misses": 45,
+    "hitRate": 0.77
+  }
+}
+```
+
 **Note** : Les remises s'appliquent uniquement aux films "Back to the Future". Les autres films sont comptés à 20€ sans remise.
 
 ## 🐳 Docker

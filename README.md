@@ -13,12 +13,10 @@ Calculateur de prix pour boutique de DVD avec promotions sur la saga "Back to th
 
 ## 📚 Documentation
 
-- **[docs/INDEX.md](./docs/INDEX.md)** - 📑 Index complet de la documentation
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Architecture Clean détaillée avec diagrammes
-- **[API.md](./API.md)** - Documentation de l'API REST
+- **[API.md](./API.md)** - Documentation de l'API REST avec cache Redis
 - **[SDK.md](./SDK.md)** - Guide d'utilisation du SDK
 - **[DOCKER.md](./DOCKER.md)** - Déploiement avec Docker et Docker Compose
-- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Guide de contribution
 - **[CHANGELOG.md](./CHANGELOG.md)** - Historique des versions
 
 ## 🚀 Démarrage rapide
